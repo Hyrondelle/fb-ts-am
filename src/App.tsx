@@ -1,9 +1,8 @@
-import {BrowserRouter as Router, Routes,Route,Link} from "react-router-dom";
+import {BrowserRouter as Router, Routes,Route} from "react-router-dom";
 import Connection from "./pages/Connection";
 import Home from "./pages/Home";
 import {UidContext} from './components/UidContext'
 import { useState,useEffect} from "react";
-import axios from "axios";
 import Nav from "./components/Nav";
 import { useDispatch } from "react-redux";
 import { getUser } from "./actions/user.actions";
