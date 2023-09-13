@@ -1,0 +1,50 @@
+.connection{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .nodal{
+        width: 40%;
+        height: 40%;
+        //border: rgba(26,26,26,0.84) 1px solid;
+        -webkit-box-shadow: 9px 6px 15px 4px rgba(26,26,26,0.84); 
+        box-shadow: 9px 6px 15px 4px rgba(26,26,26,0.84);
+        border-radius: 10px;
+    }
+    .envoyer{
+        margin-top: 15px;
+    }
+    .nodal-btns{
+        display: flex;
+        height: 20%;
+        width: 100%;
+        font-weight: 900;
+        font-size: 1.5em;
+        margin-bottom: 8%;
+    }
+    .signup-btn{
+        width: 50%;
+        background-color: rgb(17, 93, 215);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-top-left-radius: 10px;
+    }
+    .login-btn{
+        width: 50%;
+        background-color: rgb(17, 93, 215);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-top-right-radius: 10px;
+    }
+    .border{
+        border-bottom: 2px black solid;
+    }
+    .red{
+        color: #b30b0b;
+    }
+}
