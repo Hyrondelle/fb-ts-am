@@ -1,4 +1,4 @@
-import axios from 'axios';
+//import axios from 'axios';
 import React, { useState } from 'react';
 
 const Signup = () => {
@@ -14,7 +14,7 @@ const Signup = () => {
         e.preventDefault();
         if(password===verif){
             
-            await axios({
+          /*  await axios({
                 method:'post',
                 url:`${import.meta.env.VITE_APP_URL_CLIENT}api/user/register`,
                 withCredentials:true,
@@ -37,9 +37,9 @@ const Signup = () => {
                 
             })
             .catch((e:any)=>console.log(e))            
-        }
-        else{return console.log('verifiction password incorrecte');
-        }
+        }  
+        else{return console.log('verifiction password incorrecte'); */
+        } 
     }
     return (
         

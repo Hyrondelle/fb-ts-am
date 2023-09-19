@@ -1,4 +1,4 @@
-import axios from 'axios';
+//import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ const Login = () => {
     const SubmitLogin = async(e:any) =>{
         e.preventDefault();
         
-        await axios({
+       /* await axios({
             method:'post',
             url:`${import.meta.env.VITE_APP_URL_CLIENT}api/user/login`,
             withCredentials:true,
@@ -33,7 +33,7 @@ const Login = () => {
             }
             
         })
-        .catch((err:any)=>console.log(err))
+        .catch((err:any)=>console.log(err))   */
     }
     return (
         
