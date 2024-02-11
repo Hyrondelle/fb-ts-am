@@ -1,8 +1,11 @@
 //import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { db,auth } from '../firebase.config';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
+    const auth = getAuth();
     const [email,setEmail] = useState<string>('');
     const [password,setPassword] = useState<string>('');
     const navigate = useNavigate();
@@ -11,6 +14,17 @@ const Login = () => {
 
     const SubmitLogin = async(e:any) =>{
         e.preventDefault();
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+         // Signed in 
+        const user = userCredential.user;
+        console.log(user)
+        // ...
+        })
+        .catch((error) => {
+         const errorCode = error.code;
+        const errorMessage = error.message;
+        });
        /* await axios({
             method:'post',
             url:`${import.meta.env.VITE_APP_URL_CLIENT}api/user/login`,

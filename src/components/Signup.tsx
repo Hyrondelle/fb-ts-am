@@ -1,7 +1,9 @@
 //import axios from 'axios';
 import React, { useState } from 'react';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const Signup = () => {
+    const auth = getAuth();
     const [pseudo,setPseudo] = useState<string>('');
     const [email,setEmail] = useState<string>('');
     const [password,setPassword] = useState<string>('');
@@ -12,6 +14,19 @@ const Signup = () => {
 
     const SubmitSignup = async(e:any) =>{
         e.preventDefault();
+        
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed up 
+        const user = userCredential.user;
+            // ...
+            console.log(user)
+        })
+        .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+        });
         if(password===verif){
             
           /*  await axios({
