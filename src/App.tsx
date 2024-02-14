@@ -1,14 +1,23 @@
-import {BrowserRouter as Router, Routes,Route} from "react-router-dom";
+import {Routes,Route,useNavigate} from "react-router-dom";
 import Connection from "./pages/Connection";
 import Home from "./pages/Home";
 import {UidContext} from './components/UidContext'
-import { useState} from "react";
+import { useState,useEffect} from "react";
 import Nav from "./components/Nav";
 //import { useDispatch } from "react-redux";
 //import { getUser } from "./actions/user.actions";
 
 function App() {
-  const [Uid,setUid] = useState('')
+  const navigate = useNavigate();
+  const [Uid,setUid] = useState<any>('');
+  
+  useEffect(()=>{
+    if(localStorage.getItem('userId')){
+      const checkId = localStorage.getItem('userId');
+      setUid(checkId)
+      navigate('/home')
+    }
+  },[Uid])
   //const dispatch:any = useDispatch()
 
  /* useEffect(()=>{
@@ -31,14 +40,14 @@ function App() {
 
   return (
     <UidContext.Provider value={Uid}>
-      <Router>
+      
         <Nav/>
         <Routes>
           <Route path="/" element={<Connection/>}/>
           <Route path="/home" element={<Home/>}/>
           
         </Routes>
-      </Router>
+      
     </UidContext.Provider>
   )
 }

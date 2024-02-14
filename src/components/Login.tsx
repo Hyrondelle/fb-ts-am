@@ -19,6 +19,7 @@ const Login = () => {
          // Signed in 
         const user = userCredential.user;
         console.log(user)
+        localStorage.setItem('userId',user.uid)
         navigate("/home")
         // ...
         })
