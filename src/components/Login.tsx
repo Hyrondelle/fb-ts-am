@@ -1,7 +1,7 @@
 //import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { db,auth } from '../firebase.config';
+//import { db,auth } from '../firebase.config';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
