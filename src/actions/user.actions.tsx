@@ -3,14 +3,16 @@
 import { useDispatch } from "react-redux";
 import { getAuth} from "firebase/auth";
 
+
 export const GET_USER = "GET_USER";
 
 
-export const GetUser = (uid:any) =>{
+export const  GetUser = (uid:any) =>{
+    
     const dispatch:any = useDispatch();
     const auth:any = getAuth();
     return (dispatch:any) =>{
-        return getAuth()
+        return  getAuth()
             .getUser(uid)
             .then((userRecord:any) => {
             // See the UserRecord reference doc for the contents of userRecord.

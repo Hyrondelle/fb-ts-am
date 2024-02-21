@@ -16,7 +16,7 @@ function App() {
     if(localStorage.getItem('userId')){
       const checkId = localStorage.getItem('userId');
       setUid(checkId)
-      dispatch(GetUser(Uid))
+      //dispatch(GetUser(Uid))
       navigate('/home')
     }
   },[Uid])
