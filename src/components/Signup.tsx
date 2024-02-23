@@ -18,51 +18,26 @@ const Signup = () => {
 
     const SubmitSignup = async(e:any) =>{
         e.preventDefault();
-        
-        await createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            try{
-            const user = userCredential.user;
-            const userRef = doc(db,'users',user.uid)
-             //addDoc(usersCollectionRef,{email})
-             const sendDoc =  setDoc(userRef,{email:user.email,userId:user.uid})
-            console.log(user)
-            }catch(e){
-                console.log(e)
-            }
-        })
-        .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-        });
         if(password===verif){
-            
-          /*  await axios({
-                method:'post',
-                url:`${import.meta.env.VITE_APP_URL_CLIENT}api/user/register`,
-                withCredentials:true,
-                data:{
-                    pseudo,
-                    email,
-                    password
-                },})
-            .then((res:any)=>{
-                if(res.data.errors){
-                    console.log(res);
-                    pseudoError.innerHTML=res.data.errors.pseudo;
-                    emailError.innerHTML=res.data.errors.email;
-                    passwordError.innerHTML=res.data.errors.password;
+            await createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                try{
+                    const user = userCredential.user;
+                    const userRef = doc(db,'users',user.uid)
+                    //addDoc(usersCollectionRef,{email})
+                    const sendDoc =  setDoc(userRef,{email:user.email,userId:user.uid})
+                    console.log(user)
+                }catch(e){
+                    console.log(e)
                 }
-                else{
-                    console.log(res)
-                    localStorage.setItem('userId',res.data.user)
-                }
-                
             })
-            .catch((e:any)=>console.log(e))            
-        }  
-        else{return console.log('verifiction password incorrecte'); */
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+            });
+        }     
+        else{
+            return console.log('verifiction password incorrecte'); 
         } 
     }
     return (
