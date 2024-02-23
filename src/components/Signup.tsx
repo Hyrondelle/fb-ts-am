@@ -1,8 +1,12 @@
 //import axios from 'axios';
 import React, { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { addDoc,getDocs, collection,doc,setDoc } from 'firebase/firestore';
+import {db } from '../firebase.config';
+
 
 const Signup = () => {
+    const usersCollectionRef = collection(db,"users");
     const auth = getAuth();
     const [pseudo,setPseudo] = useState<string>('');
     const [email,setEmail] = useState<string>('');
@@ -15,12 +19,17 @@ const Signup = () => {
     const SubmitSignup = async(e:any) =>{
         e.preventDefault();
         
-        createUserWithEmailAndPassword(auth, email, password)
+        await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // Signed up 
-        const user = userCredential.user;
-            // ...
+            try{
+            const user = userCredential.user;
+            const userRef = doc(db,'users',user.uid)
+             //addDoc(usersCollectionRef,{email})
+             const sendDoc =  setDoc(userRef,{email:user.email,userId:user.uid})
             console.log(user)
+            }catch(e){
+                console.log(e)
+            }
         })
         .catch((error) => {
         const errorCode = error.code;

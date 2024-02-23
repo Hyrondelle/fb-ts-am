@@ -1,7 +1,7 @@
 import React, { useEffect, useState,createContext,Dispatch } from 'react';
 //import axios from 'axios';
 import Post from '../components/Post';
-import { addDoc,getDocs, collection } from 'firebase/firestore';
+import { addDoc,getDocs, collection,doc,setDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase.config';
 export const nbPostsContext = createContext({});
 type nbPosteContextType ={
