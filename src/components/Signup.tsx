@@ -1,13 +1,15 @@
 //import axios from 'axios';
 import React, { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { addDoc,getDocs, collection,doc,setDoc } from 'firebase/firestore';
-import {db } from '../firebase.config';
+import { collection,doc,setDoc } from 'firebase/firestore';
+import { db } from '../firebase.config';
+import { useNavigate } from 'react-router-dom';
 
 
 const Signup = () => {
     const usersCollectionRef = collection(db,"users");
     const auth = getAuth();
+    const navigate = useNavigate();
     const [pseudo,setPseudo] = useState<string>('');
     const [email,setEmail] = useState<string>('');
     const [password,setPassword] = useState<string>('');
@@ -15,6 +17,7 @@ const Signup = () => {
     const pseudoError:HTMLElement =document.querySelector('.emailError') as HTMLElement;
     const emailError:HTMLElement =document.querySelector('.emailError') as HTMLElement;
     const passwordError:HTMLElement =document.querySelector('.passwordError') as HTMLElement;
+    const verifError:HTMLElement =document.querySelector('.verifError') as HTMLElement;
 
     const SubmitSignup = async(e:any) =>{
         e.preventDefault();
@@ -23,10 +26,11 @@ const Signup = () => {
             .then((userCredential) => {
                 try{
                     const user = userCredential.user;
-                    const userRef = doc(db,'users',user.uid)
+                    const userRef = doc(db,'users',user.uid);
                     //addDoc(usersCollectionRef,{email})
-                    const sendDoc =  setDoc(userRef,{email:user.email,userId:user.uid})
-                    console.log(user)
+                    const sendDoc =  setDoc(userRef,{email:user.email,userId:user.uid});
+                    console.log(user);
+                    navigate('/home');
                 }catch(e){
                     console.log(e)
                 }
@@ -37,6 +41,7 @@ const Signup = () => {
             });
         }     
         else{
+            verifError.innerHTML='verifiction password incorrecte';
             return console.log('verifiction password incorrecte'); 
         } 
     }
@@ -59,6 +64,7 @@ const Signup = () => {
 
                         <label htmlFor="confirm">confirmer:</label>
                         <input onChange={(e)=>setVerif(e.target.value)} type="text" name="confirm" id="confirm" />
+                        <div className="verifError red"></div>
                         
                         <input onClick={SubmitSignup} className='envoyer' type="button" value="Valider" />
                     </form>
