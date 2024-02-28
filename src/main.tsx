@@ -1,20 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import {BrowserRouter as Router} from "react-router-dom";
-import App from './App'
-import './index.scss'
-import { Provider } from 'react-redux'
-import { createStore,applyMiddleware } from 'redux'
+import App from './App';
+import './index.scss';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import rootReducer from './reducers';
 
-import thunk from 'redux-thunk'
-import rootReducer from './reducers'
-
-import { composeWithDevTools } from 'redux-devtools-extension'
-//import logger from 'redux-logger'
-
-const store = createStore(
-  rootReducer,composeWithDevTools(applyMiddleware(thunk,/*logger*/))
-)
+const store = configureStore({ reducer: rootReducer })
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
