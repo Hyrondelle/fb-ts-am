@@ -1,5 +1,5 @@
 //import axios from "axios";
-import { getDoc,doc } from "firebase/firestore";
+import { getDoc,doc,getDocs } from "firebase/firestore";
 import { useDispatch } from "react-redux";
 import {db} from '../firebase.config'
 //import { getAuth} from "firebase/auth";

@@ -6,6 +6,8 @@ import { useState,useEffect} from "react";
 import Nav from "./components/Nav";
 import { useDispatch } from "react-redux";
 import { GetUser } from "./actions/user.actions";
+import { getDoc,doc,getDocs } from "firebase/firestore";
+import {db} from './firebase.config'
 
 function App() {
   const navigate = useNavigate();
@@ -16,8 +18,20 @@ function App() {
     if(localStorage.getItem('userId')){
       const checkId = localStorage.getItem('userId');
       setUid(checkId)
-      dispatch(GetUser(Uid))
+      const userRef = doc(db,'users',Uid)
+      //dispatch(GetUser(Uid))
+       getDoc(userRef)
+                .then((res:any)=>{
+                    console.log(res)
+                    
+                })
+                .catch((error:any) => {
+                     console.log('Error fetching user data:', error);
+                     });
       navigate('/home')
+    }
+    else{
+      navigate('/')
     }
   },[Uid])
   //const dispatch:any = useDispatch()
