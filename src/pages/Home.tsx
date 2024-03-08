@@ -1,8 +1,8 @@
 import React, { useEffect, useState,createContext,Dispatch } from 'react';
 //import axios from 'axios';
 import Post from '../components/Post';
-import { addDoc,getDocs, collection,doc,setDoc } from 'firebase/firestore';
-import { auth, db } from '../firebase.config';
+import { addDoc,getDocs, collection, doc ,setDoc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase.config';
 export const nbPostsContext = createContext({});
 type nbPosteContextType ={
     nbPosts:number;
@@ -13,13 +13,33 @@ const Home = () => {
     const [nbPosts,setNbPosts] = useState<number|nbPosteContextType>(0);
     const [listPost,setListPost] = useState<Array<any>>([]);
     const postCollectionRef = collection(db,"posts");
+    const idUser:any = localStorage.getItem('userId');
+    
     const title = "premier";
 
     const sendPost = async () => {
-        await addDoc(postCollectionRef,{title,message:post,author:{name:"nicolas", id: "nico001"}})
-        .then(()=>{  
-            console.log("post envoyé");     
+        console.log(idUser);
+        
+        const userRef = doc(db,'users',idUser);
+        await getDoc(userRef)
+        .then((userResp:any)=>{
+            console.log(userResp);
+            
+            const emailResp = userResp._document.data.value.mapValue.fields.email
+            const idRep = userResp._document.data.value.mapValue.fields.userId
+            setDoc(doc(postCollectionRef),{title,message:post,author:{email:emailResp, id: idRep}})
+            .then(()=>{  
+                console.log("post envoyé");     
+            })
+            .catch((err:any)=>{
+            console.log(err);
+            })
         })
+        .catch((err:any)=>{
+            console.log(err);
+            
+        })
+        
     }
     useEffect(()=>{
         const getPostList = async () => {

@@ -18,16 +18,16 @@ function App() {
     if(localStorage.getItem('userId')){
       const checkId = localStorage.getItem('userId');
       setUid(checkId)
-      const userRef = doc(db,'users',Uid)
+      //const userRef = doc(db,'users',Uid)
       //dispatch(GetUser(Uid))
-       getDoc(userRef)
-                .then((res:any)=>{
-                    console.log(res)
+       //getDoc(userRef)
+       //         .then((res:any)=>{
+        //            console.log(res)
                     
-                })
-                .catch((error:any) => {
-                     console.log('Error fetching user data:', error);
-                     });
+         //       })
+         //       .catch((error:any) => {
+         //            console.log('Error fetching user data:', error);
+         //            });
       navigate('/home')
     }
     else{
