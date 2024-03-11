@@ -45,6 +45,9 @@ const Home = () => {
         const getPostList = async () => {
             const data = await getDocs(postCollectionRef);
             setListPost(data.docs);
+            //console.log(data);
+           
+            
         }
         getPostList();
     },[listPost])
@@ -84,7 +87,7 @@ const Home = () => {
             
             <ul className='posts'>
                 {
-                    listPost.map((post)=><Post post={post} key={post._id}/>)
+                    listPost.map((post)=><Post post={post.data()} key={post.id}/>)
                 }
             </ul>
             </nbPostsContext.Provider>
