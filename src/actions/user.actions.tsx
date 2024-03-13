@@ -17,7 +17,7 @@ export const  GetUser = (uid:any) =>{
             await getDoc(userRef)
                 .then((res:any)=>{
                     console.log(res)
-                    dispatch({type:GET_USER,payload:res})
+                   // dispatch({type:GET_USER,payload:res})
                 })
                 .catch((error:any) => {
                      console.log('Error fetching user data:', error);

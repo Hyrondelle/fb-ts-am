@@ -1,5 +1,4 @@
 import React, { useEffect, useState,createContext,Dispatch } from 'react';
-//import axios from 'axios';
 import Post from '../components/Post';
 import { addDoc,getDocs, collection, doc ,setDoc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase.config';
@@ -17,7 +16,8 @@ const Home = () => {
     
     const title = "premier";
 
-    const sendPost = async () => {
+    const sendPost = async (e:any) => {
+        e.preventDefault();
         console.log(idUser);
         
         const userRef = doc(db,'users',idUser);
@@ -29,7 +29,8 @@ const Home = () => {
             const idRep = userResp._document.data.value.mapValue.fields.userId
             setDoc(doc(postCollectionRef),{title,message:post,author:{email:emailResp, id: idRep}})
             .then(()=>{  
-                console.log("post envoyé");     
+                console.log("post envoyé");   
+                setPost('');
             })
             .catch((err:any)=>{
             console.log(err);
@@ -52,39 +53,19 @@ const Home = () => {
         getPostList();
     },[listPost])
     
-    const Submit = async() =>{
-       /* const postObj = {message:post,userId:localStorage.getItem('userId')}
-        await axios.post('http://localhost:5000/api/post',postObj)
-        .then((res)=>{
-            setNbPosts(+1)
-        })
-        .catch((e)=>console.log(e))
-    }
-    useEffect(()=>{
-        axios({
-            method:'get',
-            url:`${import.meta.env.VITE_APP_URL_CLIENT}api/post`,
-            withCredentials:true,
-            })
-            .then((res:any)=>{console.log(res)
-                setListPost(res.data) 
-             })
-        .catch((e:any)=>console.log(e))
-        axios.get('http://localhost:5000/api/post/')
-        .then((res)=>{console.log(res)
-           setListPost(res.data) 
-        })
-        .catch((e)=>console.log(e))
-    },[nbPosts])   */
-}
     return (
         <div className='home'>
             <nbPostsContext.Provider value={{nbPosts,setNbPosts}}>
-            <h1>coucou</h1>
-            <label htmlFor="post">message:</label>
-            <input onChange={(e)=>setPost(e.target.value)} type="text" name="post" id="post" />
-            <button onClick={sendPost} type="submit">Envoyer</button>
-            
+            <h1>home</h1>
+            <form onSubmit={sendPost}>
+                <label htmlFor="post">message:</label>
+                <input onChange={(e)=>setPost(e.target.value)} 
+                       type="text" 
+                       name="post" 
+                       id="post" 
+                       value={post}/>
+                <button type="submit">Envoyer</button>
+            </form>
             <ul className='posts'>
                 {
                     listPost.map((post)=><Post post={post.data()} key={post.id}/>)
