@@ -1,16 +1,13 @@
-//import axios from 'axios';
-import React, { useState,useContext } from 'react';
-import{ClickContext} from './Post';
-import { nbPostsContext } from '../pages/Home';
+import {useState} from 'react';
+import { btnUpdate } from '../Store';
 
 const Update = (props:any) => {
-    const click:any = useContext(ClickContext);
-    const nbPosts:any = useContext(nbPostsContext);
     const [post,setPost] = useState<string>();
+    const {click,toggleBtn}:any = btnUpdate()
     const Post = props.fullPost;
     
     const toggleStyleBtn = () =>{
-        click.setClick(false);
+        toggleBtn(click)
     }
     const submitChange = async() =>{
         const idPost = props.fullPost._id

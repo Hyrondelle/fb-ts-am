@@ -18,3 +18,9 @@ export const getUser = create((set)=>({
     }
 })
 )
+export const btnUpdate = create((set)=>({
+  click:false,
+  toggleBtn(click:boolean){
+    set({click:!click})
+  }
+}))

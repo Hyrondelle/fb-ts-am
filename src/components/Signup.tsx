@@ -14,9 +14,9 @@ const Signup = () => {
     const [email,setEmail] = useState<string>('');
     const [password,setPassword] = useState<string>('');
     const [verif,setVerif] = useState<string>('');
-    const pseudoError:HTMLElement =document.querySelector('.emailError') as HTMLElement;
-    const emailError:HTMLElement =document.querySelector('.emailError') as HTMLElement;
-    const passwordError:HTMLElement =document.querySelector('.passwordError') as HTMLElement;
+    //const pseudoError:HTMLElement =document.querySelector('.emailError') as HTMLElement;
+   // const emailError:HTMLElement =document.querySelector('.emailError') as HTMLElement;
+   // const passwordError:HTMLElement =document.querySelector('.passwordError') as HTMLElement;
     const verifError:HTMLElement =document.querySelector('.verifError') as HTMLElement;
 
     const SubmitSignup = async(e:any) =>{
@@ -28,7 +28,8 @@ const Signup = () => {
                     const user = userCredential.user;
                     const userRef = doc(db,'users',user.uid);
                     //addDoc(usersCollectionRef,{email})
-                    const sendDoc =  setDoc(userRef,{email:user.email,userId:user.uid});
+                    
+                    setDoc(userRef,{email:user.email,userId:user.uid});
                     console.log(user);
                     navigate('/home');
                 }catch(e){
@@ -36,8 +37,8 @@ const Signup = () => {
                 }
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
+              //  const errorCode = error.code;
+              //  const errorMessage = error.message;
             });
         }     
         else{
