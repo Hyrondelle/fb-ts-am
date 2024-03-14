@@ -8,16 +8,19 @@ import { useDispatch } from "react-redux";
 import { GetUser } from "./actions/user.actions";
 import { getDoc,doc,getDocs } from "firebase/firestore";
 import {db} from './firebase.config'
+import { getUser } from "./Store";
 
 function App() {
   const navigate = useNavigate();
   const dispatch:any = useDispatch()
   const [Uid,setUid] = useState<any>('');
+  const {email, checkUser} = getUser()
   
   useEffect(()=>{
     if(localStorage.getItem('userId')){
       const checkId = localStorage.getItem('userId');
       setUid(checkId)
+      checkUser(Uid)
       //const userRef = doc(db,'users',Uid)
       //dispatch(GetUser(Uid))
        //getDoc(userRef)

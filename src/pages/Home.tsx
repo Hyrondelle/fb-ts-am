@@ -1,7 +1,8 @@
-import React, { useEffect, useState,createContext,Dispatch } from 'react';
+import { useEffect, useState,createContext,Dispatch } from 'react';
 import Post from '../components/Post';
-import { addDoc,getDocs, collection, doc ,setDoc, getDoc } from 'firebase/firestore';
+import { getDocs, collection, doc ,setDoc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase.config';
+import { getUser } from '../Store';
 export const nbPostsContext = createContext({});
 type nbPosteContextType ={
     nbPosts:number;
@@ -13,8 +14,9 @@ const Home = () => {
     const [listPost,setListPost] = useState<Array<any>>([]);
     const postCollectionRef = collection(db,"posts");
     const idUser:any = localStorage.getItem('userId');
-    
+    const {email,id}:any = getUser()
     const title = "premier";
+
 
     const sendPost = async (e:any) => {
         e.preventDefault();
@@ -40,18 +42,14 @@ const Home = () => {
             console.log(err);
             
         })
-        
     }
     useEffect(()=>{
         const getPostList = async () => {
             const data = await getDocs(postCollectionRef);
             setListPost(data.docs);
-            //console.log(data);
-           
-            
         }
         getPostList();
-    },[listPost])
+    },[listPost, postCollectionRef])
     
     return (
         <div className='home'>
@@ -59,13 +57,13 @@ const Home = () => {
             <h1>home</h1>
             <form onSubmit={sendPost}>
                 <label htmlFor="post">message:</label>
-                <input onChange={(e)=>setPost(e.target.value)} 
-                       type="text" 
+                <textarea onChange={(e)=>setPost(e.target.value)}  
                        name="post" 
                        id="post" 
                        value={post}/>
                 <button type="submit">Envoyer</button>
             </form>
+            <p>{email}</p><p>{id}</p>
             <ul className='posts'>
                 {
                     listPost.map((post)=><Post post={post.data()} key={post.id}/>)
