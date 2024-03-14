@@ -10,7 +10,6 @@ export const getUser = create((set)=>({
         await getDoc(userRef)
         .then((rep:DocumentData)=>{
           const repObj = rep.data()
-          //const repJson = JSON.stringify(repObj)
           set({email:repObj.email,id:rep.id})
         })
         .catch((e)=>console.log(e)

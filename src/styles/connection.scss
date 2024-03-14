@@ -6,7 +6,8 @@
 
     .nodal{
         width: 40%;
-        height: 40%;
+        min-width: 320px;
+        height: 46%;
         //border: rgba(26,26,26,0.84) 1px solid;
         -webkit-box-shadow: 9px 6px 15px 4px rgba(26,26,26,0.84); 
         box-shadow: 9px 6px 15px 4px rgba(26,26,26,0.84);
@@ -21,7 +22,7 @@
         width: 100%;
         font-weight: 900;
         font-size: 1.5em;
-        margin-bottom: 8%;
+        
     }
     .signup-btn{
         width: 50%;
@@ -31,6 +32,7 @@
         justify-content: center;
         cursor: pointer;
         border-top-left-radius: 10px;
+        
     }
     .login-btn{
         width: 50%;
