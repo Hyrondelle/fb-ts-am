@@ -12,6 +12,21 @@
         -webkit-box-shadow: 9px 6px 15px 4px rgba(26,26,26,0.84); 
         box-shadow: 9px 6px 15px 4px rgba(26,26,26,0.84);
         border-radius: 10px;
+
+        input{
+            height: 2em;
+            padding: 12px 20px;
+            border-radius: 8em;
+            box-shadow: 10px 10px 16px -8px rgba(0,0,0,0.1);
+            border-color: $color5;
+        }
+        input[type=button]{
+            padding: 0;
+            background-color: $color5;
+        }
+        label{
+            margin-left: 10px;
+        }
     }
     .envoyer{
         margin-top: 15px;
@@ -26,7 +41,7 @@
     }
     .signup-btn{
         width: 50%;
-        background-color: rgb(17, 93, 215);
+        background-color: $color3;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -36,7 +51,7 @@
     }
     .login-btn{
         width: 50%;
-        background-color: rgb(17, 93, 215);
+        background-color: $color3;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -44,7 +59,7 @@
         border-top-right-radius: 10px;
     }
     .border{
-        border-bottom: 2px black solid;
+        border-bottom: 2px $color5 solid;
     }
     .red{
         color: #b30b0b;
