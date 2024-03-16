@@ -1,16 +1,17 @@
 import {Link} from 'react-router-dom'
 import {ImExit} from 'react-icons/im'
+import { getUser } from '../Store';
 
 const Nav = () => {
-  //const uid =useContext(UidContext)
-  const uid = 'nico'
-  //const userData = useSelector((state:any)=>state.userReducer)
+  const {pseudo}:any = getUser();
+  console.log(pseudo);
+  
     return (
         <nav>
           <Link to="/home">Home</Link>
-          {(uid?
+          {(pseudo?
           <div className="pseudo-exit">
-            <h1>Bonjour {}</h1>
+            <h1>Bonjour {pseudo}</h1>
             <ImExit/>
           </div>:<></>
           )}

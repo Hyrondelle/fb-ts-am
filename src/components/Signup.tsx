@@ -29,9 +29,11 @@ const Signup = () => {
                     const userRef = doc(db,'users',user.uid);
                     //addDoc(usersCollectionRef,{email})
                     
-                    setDoc(userRef,{email:user.email,userId:user.uid});
+                    setDoc(userRef,{email:user.email,pseudo:pseudo,userId:user.uid});
                     console.log(user);
                     navigate('/home');
+                    
+                    
                 }catch(e){
                     console.log(e)
                 }

@@ -5,12 +5,13 @@ import { db } from '../src/firebase.config';
 export const getUser = create((set)=>({
     email:'email@mail.fr',
     id:'',
+    pseudo:'',
     async checkUser(userId:any){
         const userRef = doc(db,'users',userId);
         await getDoc(userRef)
         .then((rep:DocumentData)=>{
           const repObj = rep.data()
-          set({email:repObj.email,id:rep.id})
+          set({email:repObj.email,pseudo:repObj.pseudo,id:rep.id})
         })
         .catch((e)=>console.log(e)
         )
