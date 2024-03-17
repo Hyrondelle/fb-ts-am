@@ -4,8 +4,6 @@ import { getUser } from '../Store';
 
 const Nav = () => {
   const {pseudo}:any = getUser();
-  console.log(pseudo);
-  
     return (
         <nav>
           <Link to="/home">Home</Link>
