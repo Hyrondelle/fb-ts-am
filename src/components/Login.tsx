@@ -27,28 +27,6 @@ const Login = () => {
          const errorCode = error.code;
         const errorMessage = error.message;
         });
-       /* await axios({
-            method:'post',
-            url:`${import.meta.env.VITE_APP_URL_CLIENT}api/user/login`,
-            withCredentials:true,
-            data:{
-                email,
-                password
-            },})
-        .then((res:any)=>{
-            if(res.data.errors){
-                console.log(res);
-                emailError.innerHTML=res.data.errors.email;
-                passwordError.innerHTML=res.data.errors.password;
-            }
-            else{
-                console.log(res)
-                navigate("/home")
-                localStorage.setItem('userId',res.data.user)
-            }
-            
-        })
-        .catch((err:any)=>console.log(err))   */
     }
     return (
         

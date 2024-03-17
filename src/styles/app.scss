@@ -6,4 +6,11 @@
 }
 body{
     background-color: $color3;
+    @media screen and (min-width: 1500px) {
+        font-size: 1.5em;
+        }
+    @media screen and (min-width: 2000px) {
+        font-size: 2.5em;
+    }
 }
+

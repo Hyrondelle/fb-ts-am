@@ -7,7 +7,7 @@
     .nodal{
         width: 40%;
         min-width: 320px;
-        height: 46%;
+        height: 55%;
         //border: rgba(26,26,26,0.84) 1px solid;
         -webkit-box-shadow: 9px 6px 15px 4px rgba(26,26,26,0.84); 
         box-shadow: 9px 6px 15px 4px rgba(26,26,26,0.84);
@@ -19,6 +19,9 @@
             border-radius: 8em;
             box-shadow: 10px 10px 16px -8px rgba(0,0,0,0.1);
             border-color: $color5;
+            @media screen and (min-width: 2000px){
+                height: 3em;
+            }
         }
         input[type=button]{
             padding: 0;
@@ -27,6 +30,9 @@
         label{
             margin-left: 10px;
         }
+        @media screen and (max-width: 877px) {
+            height: 60%;
+            }
     }
     .envoyer{
         margin-top: 15px;
