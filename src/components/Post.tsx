@@ -1,12 +1,14 @@
 
 import {FaPen} from 'react-icons/fa';
 import Update from './Update';
-import { btnUpdate } from '../Store';
+import { btnUpdate,getUser } from '../Store';
 
 const Post = (props:any) => {
     const {click,toggleBtn}:any = btnUpdate()
+    const {id}:any = getUser()
     const messagePost = props.post.message
     const fullPost = props.post
+    console.log(fullPost);
     
     const modify = () =>{
         toggleBtn(click)
@@ -15,7 +17,7 @@ const Post = (props:any) => {
     return (
         <div className='post'>    
             <div className='post-contain'>
-                <p>{messagePost}</p>
+                <div>{messagePost}</div>
             </div>
             <div className="social">
                 <div className="total">
@@ -29,8 +31,8 @@ const Post = (props:any) => {
                     <div className='like btn centre'>like</div>
                     <div className='comment btn centre'>comment</div>
                     <div className='partage btn centre'>partage</div>
-                    <button onClick={modify} className='modify'><FaPen/></button>
-                    {click &&<Update fullPost={fullPost}/>}   
+                    {(id==fullPost.author.id)?<button onClick={modify} className='modify'><FaPen/></button>:<></>}
+                      
                 </div>
             </div>          
         </div>
