@@ -12,16 +12,10 @@ const Update = (props:any) => {
     const submitChange = async() =>{
         const idPost = props.fullPost._id
         Post.message = post;
-       // await axios.put('http://localhost:3000/api/post'+idPost,Post)
-       // .then((res)=>click.setClick(false))
-       // .catch((e)=>console.log(e))
     }
     const deletePost = async() =>{
         const idPost = props.fullPost._id
         Post.message = post;
-       // await axios.delete('http://localhost:3000/api/post'+idPost)
-       // .then((res)=>nbPosts.setNbPosts(-1))
-       // .catch((e)=>console.log(e))
     }
      return (
          <div className='update' id='updateEl'>

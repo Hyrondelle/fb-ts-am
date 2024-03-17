@@ -6,7 +6,7 @@ const Nav = () => {
   const {pseudo}:any = getUser();
     return (
         <nav>
-          <Link to="/home">Home</Link>
+          
           {(pseudo?
           <div className="pseudo-exit">
             <h1>Bonjour {pseudo}</h1>
