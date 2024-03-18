@@ -1,6 +1,5 @@
 
 import {FaPen} from 'react-icons/fa';
-import Update from './Update';
 import { btnUpdate,getUser } from '../Store';
 
 const Post = (props:any) => {
@@ -16,7 +15,7 @@ const Post = (props:any) => {
     return (
         <div className='post'>    
             <div className='post-contain'>
-                <div>{messagePost}</div>
+                {(!click||id!==fullPost.author.id)?<div>{messagePost}</div>:<textarea defaultValue={messagePost}></textarea>}
             </div>
             <div className="social">
                 <div className="total">
