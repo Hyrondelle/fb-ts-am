@@ -10,21 +10,17 @@ const Home = () => {
     const [listPost,setListPost] = useState<Array<any>>([]);
     const postCollectionRef = collection(db,"posts");
     const idUser:any = localStorage.getItem('userId');
-    const title = "premier";
-
 
     const sendPost = async (e:any) => {
         e.preventDefault();
-        console.log(idUser);
-        
         const userRef = doc(db,'users',idUser);
         await getDoc(userRef)
         .then((userResp:any)=>{
             console.log(userResp);
-            
-            const emailResp = userResp._document.data.value.mapValue.fields.email
-            const idRep = userResp._document.data.value.mapValue.fields.userId
-            setDoc(doc(postCollectionRef),{title,message:post,author:{email:emailResp, id: idRep}})
+            const user = userResp.data();
+            const emailResp = user.email;
+            const idRep = user.userId
+            setDoc(doc(postCollectionRef),{message:post,author:{email:emailResp, id: idRep}})
             .then(()=>{  
                 console.log("post envoyé");   
                 setPost('');

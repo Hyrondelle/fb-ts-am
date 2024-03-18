@@ -8,8 +8,7 @@ const Post = (props:any) => {
     const {id}:any = getUser()
     const messagePost = props.post.message
     const fullPost = props.post
-    console.log(fullPost);
-    
+  
     const modify = () =>{
         toggleBtn(click)
     }
@@ -31,7 +30,7 @@ const Post = (props:any) => {
                     <div className='like btn centre'>like</div>
                     <div className='comment btn centre'>comment</div>
                     <div className='partage btn centre'>partage</div>
-                    {(id==fullPost.author.id)?<button onClick={modify} className='modify'><FaPen/></button>:<></>}
+                    {(id===fullPost.author.id)?(<button onClick={modify} className='modify'><FaPen/></button>):(<div></div>)}
                       
                 </div>
             </div>          
