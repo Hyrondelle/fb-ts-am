@@ -2,8 +2,8 @@ import {Routes,Route,useNavigate} from "react-router-dom";
 import Connection from "./pages/Connection";
 import Home from "./pages/Home";
 import { useState,useEffect} from "react";
-import Nav from "./components/Nav";
 import { getUser } from "./Store";
+import Profil from "./pages/Profil";
 
 function App() {
   const navigate = useNavigate();
@@ -24,10 +24,12 @@ function App() {
  
   return (
       <div>
-        <Nav/>
+        
         <Routes>
+        
           <Route path="/" element={<Connection/>}/>
           <Route path="/home" element={<Home/>}/>
+          <Route path="/profil" element={<Profil/>}/>
           
         </Routes>
         </div>

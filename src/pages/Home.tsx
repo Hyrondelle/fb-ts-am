@@ -1,9 +1,8 @@
-import { useEffect, useState,createContext,Dispatch } from 'react';
+import { useEffect, useState} from 'react';
 import Post from '../components/Post';
 import { getDocs, collection, doc ,setDoc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase.config';
-import { getUser } from '../Store';
-export const nbPostsContext = createContext({});
+import Nav from '../components/Nav';
 
 const Home = () => {
     const [post,setPost] = useState<string>('');
@@ -44,7 +43,8 @@ const Home = () => {
     
     return (
         <div className='home'>
-            <h1>home</h1>
+            <Nav/>
+            
             <form onSubmit={sendPost}>
                 <label htmlFor="post">message:</label>
                 <textarea onChange={(e)=>setPost(e.target.value)}  
