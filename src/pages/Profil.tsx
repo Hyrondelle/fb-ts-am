@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import { getStorage, ref,uploadBytes } from "firebase/storage";
+import { getUser } from '../Store';
 
 const Profil = () => {
-  const storage = getStorage();
-  const imagesRef = ref(storage, 'images/img.jpg');
+  const storage = getStorage();  
   const [photo,setPhoto] = useState<any>();
+  const {id}:any = getUser();
 
   const sendPhoto = (e:any) =>{
     e.preventDefault()
+      const imagesRef = ref(storage, 'images/'+id+'/'+photo.name);
       uploadBytes(imagesRef, photo)
       .then((snapshot) => {
       console.log('Uploaded a blob or file!');
+      console.log(photo.name);
       console.log(snapshot);
       })
       .catch((e)=>console.log('pb upload'+e)
