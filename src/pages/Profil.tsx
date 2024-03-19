@@ -11,7 +11,7 @@ const Profil = () => {
     e.preventDefault()
       const imagesRef = ref(storage, 'images/'+id+'/'+id+'.jpg');
       uploadBytes(imagesRef, photo)
-      .then((snapshot) => {
+      .then(() => {
       console.log('Uploaded a blob or file!');
       
       })
