@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getStorage, ref,uploadBytes } from "firebase/storage";
+import { getStorage, ref,uploadBytes,getDownloadURL } from "firebase/storage";
 import { getUser } from '../Store';
 
 const Profil = () => {
@@ -9,17 +9,24 @@ const Profil = () => {
 
   const sendPhoto = (e:any) =>{
     e.preventDefault()
-      const imagesRef = ref(storage, 'images/'+id+'/'+photo.name);
+      const imagesRef = ref(storage, 'images/'+id+'/'+id+'.jpg');
       uploadBytes(imagesRef, photo)
       .then((snapshot) => {
       console.log('Uploaded a blob or file!');
-      console.log(photo.name);
-      console.log(snapshot);
+      
       })
       .catch((e)=>console.log('pb upload'+e)
       );
     }
-    
+      const getPhoto = () => {
+        getDownloadURL(ref(storage, 'images/'+id+'/'+id+'.jpg'))
+        .then((url) => {
+          const img = document.getElementById('myimg');
+          img?.setAttribute('src', url);
+        })
+        .catch((err) =>console.log(err)
+        )
+      }
       const handleChange =(e:any) =>{
         setPhoto(e.target.files[0])
       }
@@ -29,6 +36,8 @@ const Profil = () => {
             <input onChange={handleChange} type="file" name="photoProfil" id="photoProfil" />
             <button  type="submit">envoyer</button>
             </form>
+            <img id='myimg'></img>
+            <button onClick={getPhoto}>getphoto</button>
         </div>
     );
 };
