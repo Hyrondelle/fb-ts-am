@@ -3,16 +3,17 @@ import { getStorage, ref,uploadBytes } from "firebase/storage";
 
 const Profil = () => {
   const storage = getStorage();
-  const imagesRef = ref(storage, 'images');
+  const imagesRef = ref(storage, 'images/img.jpg');
   const [photo,setPhoto] = useState<any>();
 
-  const sendPhoto = () =>{
+  const sendPhoto = (e:any) =>{
+    e.preventDefault()
       uploadBytes(imagesRef, photo)
       .then((snapshot) => {
       console.log('Uploaded a blob or file!');
       console.log(snapshot);
       })
-      .catch(()=>console.log('pb upload')
+      .catch((e)=>console.log('pb upload'+e)
       );
     }
     
@@ -21,8 +22,10 @@ const Profil = () => {
       }
     return (
         <div>
+          <form onSubmit={sendPhoto}>
             <input onChange={handleChange} type="file" name="photoProfil" id="photoProfil" />
-            <button onSubmit={sendPhoto} type="submit">envoyer</button>
+            <button  type="submit">envoyer</button>
+            </form>
         </div>
     );
 };
