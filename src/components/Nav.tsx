@@ -6,7 +6,7 @@ const Nav = () => {
   const {pseudo}:any = getUser();
     return (
         <nav>
-          <Link to="/profil">profil</Link>
+          {(window.location.pathname=='/home')?<Link to="/profil">profil</Link>:<Link to="/home">home</Link>}
           {(pseudo?
           <div className="pseudo-exit">
             <h1>Bonjour {pseudo}</h1>

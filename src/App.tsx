@@ -20,19 +20,16 @@ function App() {
     else{
       navigate('/')
     }
-  },[Uid, checkUser, navigate])
+  },[Uid, checkUser])
  
   return (
       <div>
-        
-        <Routes>
-        
-          <Route path="/" element={<Connection/>}/>
-          <Route path="/home" element={<Home/>}/>
-          <Route path="/profil" element={<Profil/>}/>
-          
-        </Routes>
-        </div>
+          <Routes>
+            <Route path="/" element={<Connection/>}/>
+            <Route path="/home" element={<Home/>}/>
+            <Route path="/profil" element={<Profil/>}/>  
+          </Routes>
+      </div>
   )
 }
 

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { getStorage, ref,uploadBytes,getDownloadURL } from "firebase/storage";
 import { getUser } from '../Store';
+import Nav from '../components/Nav';
 
 const Profil = () => {
   const storage = getStorage();  
@@ -31,7 +32,8 @@ const Profil = () => {
         setPhoto(e.target.files[0])
       }
     return (
-        <div>
+        <div className='profil'>
+          <Nav/>
           <form onSubmit={sendPhoto}>
             <input onChange={handleChange} type="file" name="photoProfil" id="photoProfil" />
             <button  type="submit">envoyer</button>

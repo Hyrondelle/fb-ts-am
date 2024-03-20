@@ -3,7 +3,6 @@ import Post from '../components/Post';
 import { getDocs, collection, doc ,setDoc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase.config';
 import Nav from '../components/Nav';
-import Profil from './Profil';
 
 const Home = () => {
     const [post,setPost] = useState<string>('');
@@ -45,7 +44,6 @@ const Home = () => {
     return (
         <div className='home'>
             <Nav/>
-            <Profil/>
             <form onSubmit={sendPost}>
                 <label htmlFor="post">message:</label>
                 <textarea onChange={(e)=>setPost(e.target.value)}  
