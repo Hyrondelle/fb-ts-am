@@ -38,7 +38,7 @@ const Profil = () => {
             <input onChange={handleChange} type="file" name="photoProfil" id="photoProfil" />
             <button  type="submit">envoyer</button>
             </form>
-            <img id='myimg'></img>
+            <img id='myimg' src='src\assets\defautProfil.png'></img>
             <button onClick={getPhoto}>getphoto</button>
         </div>
     );
