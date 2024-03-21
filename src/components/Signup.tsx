@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc,setDoc } from 'firebase/firestore';
 import { db } from '../firebase.config';
 import { useNavigate } from 'react-router-dom';
+import { getUser } from '../Store';
 
 
 const Signup = () => {
@@ -12,6 +13,8 @@ const Signup = () => {
     const [email,setEmail] = useState<string>('');
     const [password,setPassword] = useState<string>('');
     const [verif,setVerif] = useState<string>('');
+    const {checkUser}:any = getUser();
+    // eslint-disable-next-line no-useless-escape
     const emailRegex = new RegExp(/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/, "gm");
     const pseudoError:HTMLElement =document.querySelector('.pseudoError') as HTMLElement;
     const emailError:HTMLElement =document.querySelector('.emailError') as HTMLElement;
@@ -43,16 +46,15 @@ const Signup = () => {
                                 const userRef = doc(db,'users',user.uid);
                                 setDoc(userRef,{email:user.email,pseudo:pseudo,userId:user.uid});
                                 console.log(user);
+                                localStorage.setItem('userId',user.uid)
+                                checkUser(user.uid)
                                 navigate('/home');
-                                
-                                
                             }catch(e){
                                 console.log(e)
                             }
                         })
                         .catch((error) => {
                           console.log(error);
-                          
                         });
                     }     
                     else{
