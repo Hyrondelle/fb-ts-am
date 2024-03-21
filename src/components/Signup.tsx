@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { collection,doc,setDoc } from 'firebase/firestore';
+import { doc,setDoc } from 'firebase/firestore';
 import { db } from '../firebase.config';
 import { useNavigate } from 'react-router-dom';
 
 
 const Signup = () => {
-    const usersCollectionRef = collection(db,"users");
     const auth = getAuth();
     const navigate = useNavigate();
     const [pseudo,setPseudo] = useState<string>('');
@@ -42,8 +41,6 @@ const Signup = () => {
                             try{
                                 const user = userCredential.user;
                                 const userRef = doc(db,'users',user.uid);
-                                //addDoc(usersCollectionRef,{email})
-                                
                                 setDoc(userRef,{email:user.email,pseudo:pseudo,userId:user.uid});
                                 console.log(user);
                                 navigate('/home');
@@ -54,8 +51,8 @@ const Signup = () => {
                             }
                         })
                         .catch((error) => {
-                          //  const errorCode = error.code;
-                          //  const errorMessage = error.message;
+                          console.log(error);
+                          
                         });
                     }     
                     else{

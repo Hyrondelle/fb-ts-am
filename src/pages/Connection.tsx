@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Login from '../components/Login';
 import Signup from '../components/Signup';
-import Nav from '../components/Nav';
 
 const Connection = () => {
     const [signup,setSignup] = useState<boolean>(true);
@@ -11,7 +10,6 @@ const Connection = () => {
     return (
         
         <div className='connection'>
-            <Nav/>
             <div className="nodal">
                 <div className="nodal-btns">
                     <div className={signup?'signup-btn border':'signup-btn'} 
