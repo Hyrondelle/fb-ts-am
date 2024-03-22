@@ -17,11 +17,11 @@ const Home = () => {
         .then((userResp:any)=>{
             console.log(userResp);
             const user = userResp.data();
-            const emailResp = user.email;
+            const pseudoResp = user.pseudo;
             const idRep = user.userId
-            setDoc(doc(postCollectionRef),{message:post,author:{email:emailResp, id: idRep}})
+            setDoc(doc(postCollectionRef,idRep+post[0]+post[1]),{message:post,id:idRep+post[0]+post[1],date:new Date,author:{pseudo:pseudoResp, id: idRep}})
             .then(()=>{  
-                console.log("post envoyé");   
+                console.log("post envoyé"); 
                 setPost('');
             })
             .catch((err:any)=>{
@@ -37,6 +37,7 @@ const Home = () => {
         const getPostList = async () => {
             const data = await getDocs(postCollectionRef);
             setListPost(data.docs);
+            
         }
         getPostList();
     },[listPost, postCollectionRef])
@@ -46,7 +47,7 @@ const Home = () => {
             <Nav/>
             <form onSubmit={sendPost}>
                 <label htmlFor="post">message:</label>
-                <textarea onChange={(e)=>setPost(e.target.value)}  
+                <textarea autoFocus onChange={(e)=>setPost(e.target.value)}  
                        name="post" 
                        id="post" 
                        value={post}/>
