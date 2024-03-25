@@ -33,7 +33,7 @@ const Post = (props:any) => {
     return (
         <div className='post'>    
             <div className='post-contain'>
-                {(!click&&id+messagePost[0]+messagePost[1]!==fullPost.id)?(<div>{messagePost}</div>):
+                {(!click||id+messagePost[0]+messagePost[1]!==fullPost.id)?(<div>{messagePost}</div>):
                 (<form onSubmit={sendNewMessage}>
                     <textarea defaultValue={messagePost} onChange={(e)=>setChangeMessage(e.target.value)}>
                     </textarea>
@@ -52,7 +52,7 @@ const Post = (props:any) => {
                     <div className='like btn centre'>like</div>
                     <div className='comment btn centre'>comment</div>
                     <div className='partage btn centre'>partage</div>
-                    {(id===fullPost.author.id)?(<button onClick={modify} className={'modify'+id+messagePost[0]+messagePost[1]}><FaPen/></button>):(<div></div>)}
+                    {(id===fullPost.author.id)?(<button onClick={modify}><FaPen/></button>):(<div></div>)}
                       
                 </div>
             </div>          
