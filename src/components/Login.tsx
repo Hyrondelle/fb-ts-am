@@ -12,14 +12,17 @@ const Login = () => {
     const emailRegex = new RegExp(/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/, "gm");
     const emailError:HTMLElement =document.querySelector('.emailError') as HTMLElement;
     const passwordError:HTMLElement =document.querySelector('.passwordError') as HTMLElement;
+    const dbError:HTMLElement =document.querySelector('.passwordError') as HTMLElement;
 
     const SubmitLogin = async(e:any) =>{
         e.preventDefault();
+        dbError.innerHTML='';
         if(!emailRegex.test(email)){
             emailError.innerHTML='email incorrect';
         }
         else{
             emailError.innerHTML='';
+            dbError.innerHTML='';
             if(password.length < 6){
                 passwordError.innerHTML='6 caractères min';
             }
@@ -34,9 +37,11 @@ const Login = () => {
                 navigate("/home")
                 // ...
                 })
-                .catch((error) => {
+                .catch((error:any) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
+                console.log(errorCode,errorMessage);
+                dbError.innerHTML='Email ou mdp incorrect';
                 });
             }
         }
@@ -54,6 +59,7 @@ const Login = () => {
                         <input onChange={(e)=>setPassword(e.target.value)} type="text" name="mdp" id="mdp" />
                         <div className="passwordError red"></div>
                         <input onClick={SubmitLogin} className='envoyer' type="button" value="Valider" />
+                        <div className="dbError red"></div>
                     </form>
                 </div>
         
