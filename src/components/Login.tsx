@@ -9,6 +9,7 @@ const Login = () => {
     const [email,setEmail] = useState<string>('');
     const [password,setPassword] = useState<string>('');
     const navigate = useNavigate();
+    // eslint-disable-next-line no-useless-escape
     const emailRegex = new RegExp(/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/, "gm");
     const emailError:HTMLElement =document.querySelector('.emailError') as HTMLElement;
     const passwordError:HTMLElement =document.querySelector('.passwordError') as HTMLElement;

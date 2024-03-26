@@ -1,16 +1,20 @@
 import { getAuth, signOut } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
-const Logout = () => {
+export const LoGout = () =>{
     const auth = getAuth();
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     signOut(auth).then(() => {
     // Sign-out successful.
-    navigate('/')
+    localStorage.removeItem('userId')
+    //navigate('/')
     }).catch((error) => {
     // An error happened.
     console.log(error);
     });
+}
+
+const Logout = () => {
 
     return (
         <div>
