@@ -3,9 +3,11 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 //import { db,auth } from '../firebase.config';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getUser } from '../Store';
 
 const Login = () => {
     const auth = getAuth();
+    const {checkUser}:any = getUser();
     const [email,setEmail] = useState<string>('');
     const [password,setPassword] = useState<string>('');
     const navigate = useNavigate();
@@ -35,6 +37,7 @@ const Login = () => {
                 const user = userCredential.user;
                 console.log(user)
                 localStorage.setItem('userId',user.uid)
+                checkUser(user.uid)
                 navigate("/home")
                 // ...
                 })

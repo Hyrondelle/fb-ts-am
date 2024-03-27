@@ -1,13 +1,13 @@
 import { getAuth, signOut } from "firebase/auth";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export const LoGout = () =>{
+export const LoGout = async() =>{
     const auth = getAuth();
-    //const navigate = useNavigate();
-    signOut(auth).then(() => {
+    const navigate = useNavigate();
+    await signOut(auth).then(() => {
     // Sign-out successful.
     localStorage.removeItem('userId')
-    //navigate('/')
+    navigate('/')
     }).catch((error) => {
     // An error happened.
     console.log(error);
