@@ -7,7 +7,7 @@ import { db } from '../firebase.config';
 
 const Post = (props:any) => {
     const {click,toggleBtn}:any = btnUpdate()
-    const {id,pseudo}:any = getUser()
+    const {id}:any = getUser()
     const messagePost = props.post.message
     const fullPost = props.post
     const [changeMessage,setChangeMessage] = useState<string>(messagePost);

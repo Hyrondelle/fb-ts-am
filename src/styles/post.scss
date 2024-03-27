@@ -5,7 +5,7 @@
     margin: 40px auto;
     color: black;
     border-radius: 25px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
     .post-contain{
         height: 80%;
         padding: 8px;
@@ -45,6 +45,14 @@
         cursor: pointer;
         margin-left: 10%;
 
+    }
+    @media screen and (max-width: 1000px){
+        height: 300px;
+        width: 400px;
+    }
+    @media screen and (min-width: 2000px){
+        height: 400px;
+        width: 1000px;
     }
     
 }
