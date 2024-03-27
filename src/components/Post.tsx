@@ -7,7 +7,7 @@ import { db } from '../firebase.config';
 
 const Post = (props:any) => {
     const {click,toggleBtn}:any = btnUpdate()
-    const {id}:any = getUser()
+    const {id,pseudo}:any = getUser()
     const messagePost = props.post.message
     const fullPost = props.post
     const [changeMessage,setChangeMessage] = useState<string>(messagePost);
@@ -42,7 +42,7 @@ const Post = (props:any) => {
             </div>
             <div className="social">
                 <div className="total">
-                    <div className='like btn'>nblike</div>
+                    <div className='like btn'>{'@'+fullPost.author.pseudo}</div>
                     <div className='btn_x2'>
                         <div className='comment btn'>nbcomment</div>
                         <div className='partage btn'>nbpartage</div>
