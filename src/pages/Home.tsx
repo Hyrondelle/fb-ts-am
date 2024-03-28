@@ -19,7 +19,11 @@ const Home = () => {
             const user = userResp.data();
             const pseudoResp = user.pseudo;
             const idRep = user.userId
-            setDoc(doc(postCollectionRef,idRep+post[0]+post[1]),{message:post,id:idRep+post[0]+post[1],date:new Date,author:{pseudo:pseudoResp, id: idRep}})
+            setDoc(doc(postCollectionRef,idRep+post[0]+post[1]),{message:post,
+                bouton:'btn'+idRep,
+                id:idRep+post[0]+post[1],
+                date:new Date,
+                author:{pseudo:pseudoResp, id: idRep}})
             .then(()=>{  
                 console.log("post envoyé"); 
                 setPost('');

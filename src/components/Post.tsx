@@ -12,12 +12,15 @@ const Post = (props:any) => {
     const fullPost = props.post
     const [changeMessage,setChangeMessage] = useState<string>(messagePost);
     const postRef = collection(db,'posts');
+    const btn  = document.getElementsByClassName(fullPost.id)
+    
+    console.log(btn);
+    
   
     const modify = () =>{
         toggleBtn(click)
     }
         
-
     const sendNewMessage = async(e:any) =>{
         e.preventDefault();
         await updateDoc(doc(postRef,id+messagePost[0]+messagePost[1]),{message:changeMessage})
@@ -52,8 +55,7 @@ const Post = (props:any) => {
                     <div className='like btn centre'>like</div>
                     <div className='comment btn centre'>comment</div>
                     <div className='partage btn centre'>partage</div>
-                    {(id===fullPost.author.id)?(<button onClick={modify}><FaPen/></button>):(<div></div>)}
-                      
+                    {(id===fullPost.author.id)?(<button className={fullPost.id} onClick={modify}><FaPen/></button>):(<div></div>)}
                 </div>
             </div>          
         </div>

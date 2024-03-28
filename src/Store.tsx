@@ -24,3 +24,10 @@ export const btnUpdate = create((set)=>({
     set({click:!click})
   }
 }))
+export const btns = create((set)=>({
+  btnlist:[],
+  setBtnList(btn:any){
+    set({btnlist:btnlist.push(btn)})
+  }
+}))
+
