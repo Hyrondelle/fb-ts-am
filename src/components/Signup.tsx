@@ -44,7 +44,11 @@ const Signup = () => {
                             try{
                                 const user = userCredential.user;
                                 const userRef = doc(db,'users',user.uid);
-                                setDoc(userRef,{email:user.email,pseudo:pseudo,userId:user.uid});
+                                setDoc(userRef,{email:user.email,
+                                    pseudo:pseudo,
+                                    bio:'',
+                                    userId:user.uid
+                                });
                                 console.log(user);
                                 localStorage.setItem('userId',user.uid)
                                 checkUser(user.uid)

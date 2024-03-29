@@ -1,5 +1,6 @@
 
 import {FaPen} from 'react-icons/fa';
+import { GrLike } from "react-icons/gr";
 import { btnUpdate,getUser } from '../Store';
 import { useState } from 'react';
 import { doc ,updateDoc,collection} from 'firebase/firestore';
@@ -13,9 +14,7 @@ const Post = (props:any) => {
     const [changeMessage,setChangeMessage] = useState<string>(messagePost);
     const postRef = collection(db,'posts');
     const btn  = document.getElementsByClassName(fullPost.id)
-    
-    console.log(btn);
-    
+
   
     const modify = () =>{
         toggleBtn(click)
@@ -52,7 +51,7 @@ const Post = (props:any) => {
                     </div>
                 </div>
                 <div className='buttons'>
-                    <div className='like btn centre'>like</div>
+                    <button className='like btn centre'><GrLike /></button>
                     <div className='comment btn centre'>comment</div>
                     <div className='partage btn centre'>partage</div>
                     {(id===fullPost.author.id)?(<button className={fullPost.id} onClick={modify}><FaPen/></button>):(<div></div>)}

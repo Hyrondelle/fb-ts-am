@@ -22,12 +22,8 @@ export const btnUpdate = create((set)=>({
   click:false,
   toggleBtn(click:boolean){
     set({click:!click})
-  }
+  },
+  
 }))
-export const btns = create((set)=>({
-  btnlist:[],
-  setBtnList(btn:any){
-    set({btnlist:btnlist.push(btn)})
-  }
-}))
+
 
