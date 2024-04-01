@@ -5,6 +5,7 @@ import { btnUpdate,getUser } from '../Store';
 import { useState } from 'react';
 import { doc ,updateDoc,collection} from 'firebase/firestore';
 import { db } from '../firebase.config';
+import  Likes  from './Likes';
 
 const Post = (props:any) => {
     const {click,toggleBtn}:any = btnUpdate()
@@ -13,11 +14,12 @@ const Post = (props:any) => {
     const fullPost = props.post
     const [changeMessage,setChangeMessage] = useState<string>(messagePost);
     const postRef = collection(db,'posts');
-    const btn  = document.getElementsByClassName(fullPost.id)
 
-  
     const modify = () =>{
         toggleBtn(click)
+    }
+    const sendLikes = () =>{
+        Likes(fullPost)
     }
         
     const sendNewMessage = async(e:any) =>{
@@ -51,7 +53,7 @@ const Post = (props:any) => {
                     </div>
                 </div>
                 <div className='buttons'>
-                    <button className='like btn centre'><GrLike /></button>
+                    <div onClick={sendLikes} className='like btn centre'><GrLike/></div>
                     <div className='comment btn centre'>comment</div>
                     <div className='partage btn centre'>partage</div>
                     {(id===fullPost.author.id)?(<button className={fullPost.id} onClick={modify}><FaPen/></button>):(<div></div>)}
