@@ -22,6 +22,7 @@ const Home = () => {
             setDoc(doc(postCollectionRef,idRep+post[0]+post[1]),{message:post,
                 id:idRep+post[0]+post[1],
                 likes:0,
+                idLikes:[],
                 nbComments:0,
                 comments:[],
                 date:new Date,
