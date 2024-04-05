@@ -50,9 +50,10 @@ const Profil = () => {
           <form onSubmit={sendPhoto}>
             <input onChange={handleChange} type="file" name="photoProfil" id="photoProfil" />
             <button  type="submit">envoyer</button>
+            <img id='imgProfil' src='src\assets\defautProfil.png'></img>
+            <button onClick={getPhoto}>changer la photo</button>
             </form>
-            <img id='myimg' src='src\assets\defautProfil.png'></img>
-            <button onClick={getPhoto}>getphoto</button>
+            
         </div>
     );
 };
