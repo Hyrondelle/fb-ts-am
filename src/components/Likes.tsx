@@ -1,15 +1,14 @@
-import {doc , updateDoc,arrayUnion } from "firebase/firestore";
+import {doc , updateDoc , arrayUnion } from "firebase/firestore";
 import { db } from '../firebase.config';
 import { getUser } from "../Store";
 
 const Likes = async (post:any) => {
     const postRef = doc(db,'posts',post.id);
     const {id}:any = getUser();
-
-    await updateDoc(postRef,{idLikes:arrayUnion(id)})
+   
+    await updateDoc(postRef,{idlikes:arrayUnion(id)})
         .then(()=>{  
-            console.log("post liké");   
-            
+            console.log("post liké");  
         })
         .catch((err:any)=>{
             console.log(err);

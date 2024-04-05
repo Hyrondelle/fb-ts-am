@@ -19,7 +19,7 @@ const Post = (props:any) => {
         toggleBtn(click)
     }
     const sendLikes = () =>{
-        Likes(fullPost)
+        //Likes(fullPost)
     }
         
     const sendNewMessage = async(e:any) =>{

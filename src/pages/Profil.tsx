@@ -7,6 +7,19 @@ const Profil = () => {
   const storage = getStorage();  
   const [photo,setPhoto] = useState<any>();
   const {id}:any = getUser();
+  
+  try{
+    getDownloadURL(ref(storage, 'images/'+id+'/'+id+'.jpg'))
+        .then((url) => {
+          const img = document.getElementById('myimg');
+          img?.setAttribute('src', url);
+        })
+        .catch((err) =>console.log(err)
+        )
+  }
+  catch(err){
+    console.log(err);
+  }
 
   const sendPhoto = (e:any) =>{
     e.preventDefault()
