@@ -11,7 +11,7 @@ const Profil = () => {
   try{
     getDownloadURL(ref(storage, 'images/'+id+'/'+id+'.jpg'))
         .then((url) => {
-          const img = document.getElementById('myimg');
+          const img = document.getElementById('imgProfil');
           img?.setAttribute('src', url);
         })
         .catch((err) =>console.log(err)
@@ -35,7 +35,7 @@ const Profil = () => {
       const getPhoto = () => {
         getDownloadURL(ref(storage, 'images/'+id+'/'+id+'.jpg'))
         .then((url) => {
-          const img = document.getElementById('myimg');
+          const img = document.getElementById('imgProfil');
           img?.setAttribute('src', url);
         })
         .catch((err) =>console.log(err)
