@@ -58,6 +58,9 @@
         height: 300px;
         width: 400px;
     }
+    @media screen and (min-width: 1000px){
+        margin-bottom: 60px;
+    }
     @media screen and (min-width: 2000px){
         height: 400px;
         width: 1000px;
