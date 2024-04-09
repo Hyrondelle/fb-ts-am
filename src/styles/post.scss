@@ -46,6 +46,14 @@
         margin-left: 10%;
 
     }
+    .align-comments{
+        display: flex;
+        justify-content: center;
+        margin-right: 20%;
+        #comments{
+            margin-left: 5px;
+        }
+    }
     @media screen and (max-width: 1000px){
         height: 300px;
         width: 400px;

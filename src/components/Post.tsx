@@ -54,9 +54,13 @@ const Post = (props:any) => {
                 </div>
                 <div className='buttons'>
                     <div onClick={sendLikes} className='like btn centre'><GrLike/></div>
-                    <div className='comment btn centre'>comment</div>
+                    <div className='comment btn centre'>comments</div>
                     <div className='partage btn centre'>partage</div>
                     {(id===fullPost.author.id)?(<button className={fullPost.id} onClick={modify}><FaPen/></button>):(<div></div>)}
+                </div>
+                <div className='align-comments'>
+                    <label htmlFor="comments">commenter</label>
+                    <input type="text" name="comments" id="comments" />
                 </div>
             </div>          
         </div>
