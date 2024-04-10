@@ -20,7 +20,11 @@ const Post = (props:any) => {
     }
     const Likes = async(e:any) =>{
         e.preventDefault();
-        await updateDoc(doc(postRef,fullPost.id),{idLikes:arrayUnion(id),likes:fullPost.likes+1})
+        if(fullPost.idLikes.includes(id)){
+            console.log('déja liké');
+        }
+        else{
+            await updateDoc(doc(postRef,fullPost.id),{idLikes:arrayUnion(id),likes:fullPost.likes+1})
             .then(()=>{  
                 console.log("commentaire liké");   
                 toggleBtn(click)
@@ -28,6 +32,8 @@ const Post = (props:any) => {
             .catch((err:any)=>{
             console.log(err);
             })
+        }
+        
     }
         
     const sendNewMessage = async(e:any) =>{
