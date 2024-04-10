@@ -3,9 +3,8 @@ import {FaPen} from 'react-icons/fa';
 import { GrLike } from "react-icons/gr";
 import { btnUpdate,getUser } from '../Store';
 import { useState } from 'react';
-import { doc ,updateDoc,collection} from 'firebase/firestore';
+import { doc ,updateDoc,collection,arrayUnion} from 'firebase/firestore';
 import { db } from '../firebase.config';
-import  Likes  from './Likes';
 
 const Post = (props:any) => {
     const {click,toggleBtn}:any = btnUpdate()
@@ -13,13 +12,22 @@ const Post = (props:any) => {
     const messagePost = props.post.message
     const fullPost = props.post
     const [changeMessage,setChangeMessage] = useState<string>(messagePost);
+    const [addComment,setAddComment] = useState<string>('');
     const postRef = collection(db,'posts');
 
     const modify = () =>{
         toggleBtn(click)
     }
-    const sendLikes = () =>{
-        //Likes(fullPost)
+    const Likes = async(e:any) =>{
+        e.preventDefault();
+        await updateDoc(doc(postRef,fullPost.id),{idLikes:arrayUnion(id),likes:fullPost.likes+1})
+            .then(()=>{  
+                console.log("commentaire liké");   
+                toggleBtn(click)
+            })
+            .catch((err:any)=>{
+            console.log(err);
+            })
     }
         
     const sendNewMessage = async(e:any) =>{
@@ -27,6 +35,17 @@ const Post = (props:any) => {
         await updateDoc(doc(postRef,id+messagePost[0]+messagePost[1]),{message:changeMessage})
             .then(()=>{  
                 console.log("post modifié");   
+                toggleBtn(click)
+            })
+            .catch((err:any)=>{
+            console.log(err);
+            })
+    }
+    const newComment = async(e:any) =>{
+        e.preventDefault();
+        await updateDoc(doc(postRef,fullPost.id),{comments:arrayUnion(addComment),nbComments:fullPost.nbComments+1})
+            .then(()=>{  
+                console.log("commentaire envoyé");   
                 toggleBtn(click)
             })
             .catch((err:any)=>{
@@ -53,14 +72,17 @@ const Post = (props:any) => {
                     </div>
                 </div>
                 <div className='buttons'>
-                    <div onClick={sendLikes} className='like btn centre'><GrLike/></div>
+                    <div onClick={Likes} className='like btn centre'><GrLike/></div>
                     <div className='comment btn centre'>comments</div>
                     <div className='partage btn centre'>partage</div>
                     {(id===fullPost.author.id)?(<button className={fullPost.id} onClick={modify}><FaPen/></button>):(<div></div>)}
                 </div>
                 <div className='align-comments'>
+                    <form onSubmit={newComment}>
                     <label htmlFor="comments">commenter</label>
-                    <input type="text" name="comments" id="comments" />
+                    <input type="text" name="comments" id="comments" onChange={(e)=>setAddComment(e.target.value)} />
+                    <button className='btn' type="submit">comment</button>
+                    </form>
                 </div>
             </div>          
         </div>
