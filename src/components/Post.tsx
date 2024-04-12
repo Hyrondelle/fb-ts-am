@@ -1,6 +1,6 @@
 
 import {FaPen} from 'react-icons/fa';
-import { GrLike,GrLikeFill } from "react-icons/gr";
+import {BiLike, BiSolidLike } from "react-icons/bi";
 import { btnUpdate,getUser } from '../Store';
 import { useState } from 'react';
 import { doc ,updateDoc,collection,arrayUnion} from 'firebase/firestore';
@@ -81,7 +81,7 @@ const Post = (props:any) => {
                 <div className='buttons'>
                     <div onClick={Likes} 
                         className='like btn centre'>
-                            {fullPost.likes+'.'} {fullPost.idLikes.includes(id)?<GrLikeFill/>:<GrLike/>}</div>
+                            {fullPost.likes+'.'} {fullPost.idLikes.includes(id)?<BiSolidLike/>:<BiLike/>}</div>
                     <div className='comment btn centre'>{fullPost.nbComments} comments</div>
                     <div className='partage btn centre'>partage</div>
                     {(id===fullPost.author.id)?(<button className={fullPost.id} onClick={modify}><FaPen/></button>):(<div></div>)}
