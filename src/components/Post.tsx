@@ -1,6 +1,6 @@
 
 import {FaPen} from 'react-icons/fa';
-import { GrLike } from "react-icons/gr";
+import { GrLike,GrLikeFill } from "react-icons/gr";
 import { btnUpdate,getUser } from '../Store';
 import { useState } from 'react';
 import { doc ,updateDoc,collection,arrayUnion} from 'firebase/firestore';
@@ -14,9 +14,6 @@ const Post = (props:any) => {
     const [changeMessage,setChangeMessage] = useState<string>(messagePost);
     const [addComment,setAddComment] = useState<string>('');
     const postRef = collection(db,'posts');
-
-    const styleFull = {backgroundColor:"black"}
-    const styleEmpty = {backgroundColor:"white"}
 
     const modify = () =>{
         toggleBtn(click)
@@ -84,8 +81,7 @@ const Post = (props:any) => {
                 <div className='buttons'>
                     <div onClick={Likes} 
                         className='like btn centre'>
-                            {fullPost.likes+'.'} <GrLike style={fullPost.idLikes.includes(id)?styleFull:styleEmpty}
-                                /></div>
+                            {fullPost.likes+'.'} {fullPost.idLikes.includes(id)?<GrLikeFill/>:<GrLike/>}</div>
                     <div className='comment btn centre'>{fullPost.nbComments} comments</div>
                     <div className='partage btn centre'>partage</div>
                     {(id===fullPost.author.id)?(<button className={fullPost.id} onClick={modify}><FaPen/></button>):(<div></div>)}
