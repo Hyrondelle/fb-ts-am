@@ -15,9 +15,13 @@ const Post = (props:any) => {
     const [addComment,setAddComment] = useState<string>('');
     const postRef = collection(db,'posts');
 
+    const styleFull = {backgroundColor:"black"}
+    const styleEmpty = {backgroundColor:"white"}
+
     const modify = () =>{
         toggleBtn(click)
     }
+    
     const Likes = async(e:any) =>{
         e.preventDefault();
         if(fullPost.idLikes.includes(id)){
@@ -78,8 +82,11 @@ const Post = (props:any) => {
                     </div>
                 </div>
                 <div className='buttons'>
-                    <div onClick={Likes} className='like btn centre'><GrLike/></div>
-                    <div className='comment btn centre'>comments</div>
+                    <div onClick={Likes} 
+                        className='like btn centre'>
+                            {fullPost.likes+'.'} <GrLike style={fullPost.idLikes.includes(id)?styleFull:styleEmpty}
+                                /></div>
+                    <div className='comment btn centre'>{fullPost.nbComments} comments</div>
                     <div className='partage btn centre'>partage</div>
                     {(id===fullPost.author.id)?(<button className={fullPost.id} onClick={modify}><FaPen/></button>):(<div></div>)}
                 </div>
