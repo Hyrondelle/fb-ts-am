@@ -3,7 +3,7 @@ import {FaPen} from 'react-icons/fa';
 import {BiLike, BiSolidLike } from "react-icons/bi";
 import { btnUpdate,getUser } from '../Store';
 import { useState } from 'react';
-import { doc ,updateDoc,collection,arrayUnion} from 'firebase/firestore';
+import { doc ,updateDoc,collection,arrayUnion,arrayRemove} from 'firebase/firestore';
 import { db } from '../firebase.config';
 
 const Post = (props:any) => {
@@ -22,13 +22,18 @@ const Post = (props:any) => {
     const Likes = async(e:any) =>{
         e.preventDefault();
         if(fullPost.idLikes.includes(id)){
-            console.log('déja liké');
+            await updateDoc(doc(postRef,fullPost.id),{idLikes:arrayRemove(id),likes:fullPost.likes-1})
+            .then(()=>{  
+                console.log("like enlevé");   
+            })
+            .catch((err:any)=>{
+            console.log(err);
+            })
         }
         else{
             await updateDoc(doc(postRef,fullPost.id),{idLikes:arrayUnion(id),likes:fullPost.likes+1})
             .then(()=>{  
                 console.log("commentaire liké");   
-                toggleBtn(click)
             })
             .catch((err:any)=>{
             console.log(err);
@@ -52,8 +57,8 @@ const Post = (props:any) => {
         e.preventDefault();
         await updateDoc(doc(postRef,fullPost.id),{comments:arrayUnion(addComment),nbComments:fullPost.nbComments+1})
             .then(()=>{  
-                console.log("commentaire envoyé");   
-                toggleBtn(click)
+                console.log("commentaire envoyé");
+                setAddComment('')   
             })
             .catch((err:any)=>{
             console.log(err);
@@ -89,7 +94,11 @@ const Post = (props:any) => {
                 <div className='align-comments'>
                     <form onSubmit={newComment}>
                     <label htmlFor="comments">commenter</label>
-                    <input type="text" name="comments" id="comments" onChange={(e)=>setAddComment(e.target.value)} />
+                    <input type="text" 
+                    name="comments" 
+                    id="comments" 
+                    value={addComment}
+                    onChange={(e)=>setAddComment(e.target.value)} />
                     <button className='btn' type="submit">comment</button>
                     </form>
                 </div>
