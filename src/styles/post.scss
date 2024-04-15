@@ -1,34 +1,37 @@
 .post{
     background-color: $color2;
     width: 500px;
-    height: 200px;
+    min-height: 100px;
     margin: 40px auto;
     color: black;
     border-radius: 25px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
     .post-contain{
-        height: 80%;
+        min-height: 100px;
         padding: 8px;
     }
-    .social{
+    .author{
+        margin-left: 8px;
+        margin-top: 5px;
+    }
+    .total{
         background-color: white;
         border-bottom-left-radius: 25px;
         border-bottom-right-radius: 25px;
-    }
-    .total{
         display: flex;
         padding: 5px;
-        justify-content: space-between;
-        .btn_x2{
-            display: flex;
-        }
+        flex-direction: column;
     }
+    .social{
+        border-bottom:1px solid rgb(107, 105, 105) ;
+    }
+    
     .buttons{
         display: flex;
         padding: 5px;
         border-bottom-left-radius: 25px;
         border-bottom-right-radius: 25px;
-        border-top:1px solid rgb(107, 105, 105) ;
+        
         .btn{
             width: 25%;
             .partage{
@@ -41,28 +44,27 @@
             align-items: center;
         }
     }
-    .modify{
-        cursor: pointer;
-        margin-left: 10%;
-
-    }
     .align-comments{
         display: flex;
         justify-content: center;
-        margin-right: 20%;
+        align-items: center;
         #comments{
             margin-left: 5px;
         }
     }
+    .modify{
+        cursor: pointer;
+        margin-left: 10%;
+    }
     @media screen and (max-width: 1000px){
-        height: 300px;
+        //height: 300px;
         width: 400px;
     }
     @media screen and (min-width: 1000px){
         margin-bottom: 60px;
     }
     @media screen and (min-width: 2000px){
-        height: 400px;
+        //height: 400px;
         width: 1000px;
     }
     .like{

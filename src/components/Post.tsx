@@ -66,7 +66,8 @@ const Post = (props:any) => {
     }
 
     return (
-        <div className='post'>    
+        <div className='post'>   
+            <div className='author'>{'@'+fullPost.author.pseudo}</div> 
             <div className='post-contain'>
                 {(!click||id+messagePost[0]+messagePost[1]!==fullPost.id)?(<div>{messagePost}</div>):
                 (<form onSubmit={sendNewMessage}>
@@ -75,22 +76,17 @@ const Post = (props:any) => {
                     <button className='btn' type="submit">modifier</button>
                 </form>)}
             </div>
-            <div className="social">
-                <div className="total">
-                    <div className='like btn'>{'@'+fullPost.author.pseudo}</div>
-                    <div className='btn_x2'>
-                        <div className='comment btn'>nbcomment</div>
-                        <div className='partage btn'>nbpartage</div>
-                    </div>
-                </div>
-                <div className='buttons'>
+            <div className="total">
+                <div className="social">
+                    <div className='buttons'>
                     <div onClick={Likes} 
                         className='like btn centre'>
                             {fullPost.likes+'.'} {fullPost.idLikes.includes(id)?<BiSolidLike/>:<BiLike/>}</div>
                     <div className='comment btn centre'>{fullPost.nbComments} comments</div>
                     <div className='partage btn centre'>partage</div>
                     {(id===fullPost.author.id)?(<button className={fullPost.id} onClick={modify}><FaPen/></button>):(<div></div>)}
-                </div>
+                    </div>
+                </div> 
                 <div className='align-comments'>
                     <form onSubmit={newComment}>
                     <label htmlFor="comments">commenter</label>
@@ -102,7 +98,7 @@ const Post = (props:any) => {
                     <button className='btn' type="submit">comment</button>
                     </form>
                 </div>
-            </div>          
+            </div>         
         </div>
     );
 };
