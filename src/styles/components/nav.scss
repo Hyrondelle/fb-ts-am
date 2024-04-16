@@ -3,13 +3,41 @@ nav{
     justify-content: space-between;
     background-color: $color2;
     a{
-        color: black;
+        color: rgb(40, 37, 37);
         text-decoration: none;
+        font-size: larger;
+        font-weight: 800;
+        background-color: rgb(139, 169, 169);
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+        width: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    a:hover{
+        background-color: rgb(132, 158, 158);
     }
     .pseudo-exit{
         display: flex;
         width: 50%;
         justify-content: flex-end;
+        button{
+            width: 30px;
+            border-radius: 10px;
+            border-color: rgb(121, 121, 129);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .exit{
+                font-size: larger;
+                color: rgb(59, 59, 62);
+                cursor: pointer;
+            }
+        }
+        button:hover{
+            background-color: rgb(220, 220, 237);
+        }
     }
     h1{
         

@@ -12,7 +12,7 @@ const Nav = () => {
           {(pseudo?
           <div className="pseudo-exit">
             <h1>Bonjour {pseudo}</h1>
-            <button onClick={Logout}><ImExit/></button>
+            <button onClick={Logout}><ImExit className='exit'/></button>
           </div>:<></>
           )}
         </nav>
