@@ -52,13 +52,13 @@ const Home = () => {
     return (
         <div className='home'>
             <Nav/>
-            <form onSubmit={sendPost}>
-                <label htmlFor="post">message:</label>
-                <textarea autoFocus onChange={(e)=>setPost(e.target.value)}  
+            <form className='newMessage' onSubmit={sendPost}>
+                <label className='form-lab' htmlFor="post">nouveau message:</label>
+                <textarea className='form-text' autoFocus onChange={(e)=>setPost(e.target.value)}  
                        name="post" 
                        id="post" 
                        value={post}/>
-                <button type="submit">Envoyer</button>
+                <button className='form-btn' type="submit">Envoyer</button>
             </form>
             <ul className='posts'>
                 {

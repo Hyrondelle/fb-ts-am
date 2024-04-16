@@ -1,6 +1,32 @@
 .home{
     background-color: $color4 ;
     height: 100%;
+    .newMessage{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items:center;
+        padding: 10px;
+    }
+    .form-lab{
+        margin-bottom: 4px;
+        font-size: 1.5em;
+    }
+    .form-text{
+        margin-bottom: 4px;
+        border-radius: 20px;
+    }
+    .form-btn{
+        border-radius: 15px;
+        border-color: rgb(138, 143, 125);
+        background-color: rgb(215, 225, 181);
+        padding: 1.5px;
+        cursor: pointer;
+        scale: 1.2;
+    }
+    .form-btn:hover{
+        background-color: rgb(209, 211, 183);
+    }
     textarea{
         padding: 10px 10px;
     }
