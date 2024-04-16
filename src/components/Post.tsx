@@ -90,7 +90,7 @@ const Post = (props:any) => {
                     <div className='buttons'>
                     <div onClick={Likes} 
                         className='like btn centre'>
-                            {fullPost.likes+'.'} {fullPost.idLikes.includes(id)?<BiSolidLike/>:<BiLike/>}</div>
+                            {fullPost.likes+' '} {fullPost.idLikes.includes(id)?<BiSolidLike/>:<BiLike/>}</div>
                     <div className='comment btn centre'
                         onClick={viewComments}>{fullPost.nbComments} comments</div>
                     <div className='partage btn centre'>partage</div>
