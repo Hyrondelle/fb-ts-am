@@ -34,6 +34,7 @@
         
         .btn{
             width: 25%;
+            cursor: pointer;
             .partage{
                 border-bottom-right-radius: 25px;
             }
@@ -50,6 +51,11 @@
         align-items: center;
         #comments{
             margin-left: 5px;
+        }
+    }
+    .commentaires{
+        li{
+            list-style: none;
         }
     }
     .modify{

@@ -8,17 +8,20 @@ import { db } from '../firebase.config';
 
 const Post = (props:any) => {
     const {click,toggleBtn}:any = btnUpdate()
-    const {id}:any = getUser()
+    const {id,pseudo}:any = getUser()
     const messagePost = props.post.message
     const fullPost = props.post
     const [changeMessage,setChangeMessage] = useState<string>(messagePost);
     const [addComment,setAddComment] = useState<string>('');
     const postRef = collection(db,'posts');
+    const [viewComment,setViewComment] = useState<boolean>(false);
 
     const modify = () =>{
         toggleBtn(click)
     }
-    
+    const viewComments = () =>{
+        setViewComment(!viewComment)
+    }
     const Likes = async(e:any) =>{
         e.preventDefault();
         if(fullPost.idLikes.includes(id)){
@@ -55,7 +58,11 @@ const Post = (props:any) => {
     }
     const newComment = async(e:any) =>{
         e.preventDefault();
-        await updateDoc(doc(postRef,fullPost.id),{comments:arrayUnion(addComment),nbComments:fullPost.nbComments+1})
+        if(addComment.length==0){
+            console.log('veuillez écrire un commentaire');
+        }
+        else{
+            await updateDoc(doc(postRef,fullPost.id),{comments:arrayUnion({addComment,id,pseudo}),nbComments:fullPost.nbComments+1})
             .then(()=>{  
                 console.log("commentaire envoyé");
                 setAddComment('')   
@@ -63,6 +70,8 @@ const Post = (props:any) => {
             .catch((err:any)=>{
             console.log(err);
             })
+        }
+        
     }
 
     return (
@@ -82,7 +91,8 @@ const Post = (props:any) => {
                     <div onClick={Likes} 
                         className='like btn centre'>
                             {fullPost.likes+'.'} {fullPost.idLikes.includes(id)?<BiSolidLike/>:<BiLike/>}</div>
-                    <div className='comment btn centre'>{fullPost.nbComments} comments</div>
+                    <div className='comment btn centre'
+                        onClick={viewComments}>{fullPost.nbComments} comments</div>
                     <div className='partage btn centre'>partage</div>
                     {(id===fullPost.author.id)?(<button className={fullPost.id} onClick={modify}><FaPen/></button>):(<div></div>)}
                     </div>
@@ -98,6 +108,14 @@ const Post = (props:any) => {
                     <button className='btn' type="submit">comment</button>
                     </form>
                 </div>
+                {viewComment?
+                <ul className='commentaires'>
+                {
+                    fullPost.comments
+                    .map((comment:any)=>
+                    <li key={comment.id}><div>{'@'+comment.pseudo}</div><div>{comment.addComment}</div></li>)
+                }
+                </ul>:<></>}
             </div>         
         </div>
     );
