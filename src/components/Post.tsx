@@ -3,7 +3,7 @@ import {FaPen} from 'react-icons/fa';
 import {BiLike, BiSolidLike } from "react-icons/bi";
 import { getUser } from '../Store';
 import { useState } from 'react';
-import { doc ,updateDoc,collection,arrayUnion,arrayRemove} from 'firebase/firestore';
+import { doc ,updateDoc,collection,arrayUnion,arrayRemove,deleteDoc} from 'firebase/firestore';
 import { db } from '../firebase.config';
 
 const Post = (props:any) => {
@@ -50,7 +50,17 @@ const Post = (props:any) => {
         await updateDoc(doc(postRef,id+messagePost[0]+messagePost[1]),{message:changeMessage})
             .then(()=>{  
                 console.log("post modifié");   
-                toggleBtn(click)
+                setClick(!click)
+            })
+            .catch((err:any)=>{
+            console.log(err);
+            })
+    }
+    const deletePost = async(e:any) =>{
+        e.preventDefault();
+        await deleteDoc(doc(postRef,id+messagePost[0]+messagePost[1]))
+            .then(()=>{  
+                console.log("post effacé");   
             })
             .catch((err:any)=>{
             console.log(err);
@@ -80,9 +90,14 @@ const Post = (props:any) => {
             <div className='post-contain'>
                 {(!click||id+messagePost[0]+messagePost[1]!==fullPost.id)?(<div>{messagePost}</div>):
                 (<form onSubmit={sendNewMessage}>
-                    <textarea defaultValue={messagePost} onChange={(e)=>setChangeMessage(e.target.value)}>
+                    <textarea defaultValue={messagePost} 
+                        className='changeMsg'
+                        onChange={(e)=>setChangeMessage(e.target.value)}>
                     </textarea>
-                    <button className='btn' type="submit">modifier</button>
+                    <div>
+                        <button className='btn' type="submit">modifier</button>
+                        <button className='btn' onClick={deletePost}>effacer</button>
+                    </div>
                 </form>)}
             </div>
             <div className="total">
@@ -94,7 +109,7 @@ const Post = (props:any) => {
                     <div className='comment btn centre'
                         onClick={viewComments}>{fullPost.nbComments} comments</div>
                     <div className='partage btn centre'>partage</div>
-                    {(id===fullPost.author.id)?(<button className={fullPost.id} onClick={modify}><FaPen/></button>):(<div></div>)}
+                    {(id===fullPost.author.id)?(<button className='btn-modif' onClick={modify}><FaPen/></button>):(<div></div>)}
                     </div>
                 </div> 
                 <div className='align-comments'>

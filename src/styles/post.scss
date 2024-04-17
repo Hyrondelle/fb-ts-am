@@ -23,6 +23,9 @@
         padding: 5px;
         flex-direction: column;
     }
+    .changeMsg{
+        border-radius: 10px;
+    }
     .social{
         border-bottom:1px solid rgb(107, 105, 105) ;
     }
@@ -46,8 +49,18 @@
             }
         }
         .btn:hover{
-            
             scale: 1.1;  
+        }
+        .btn-modif{
+            border-radius: 10px;
+            width: 30px;
+            background-color: antiquewhite;
+            border-color: bisque;
+            color: rgb(66, 62, 62);
+        }
+        .btn-modif:hover{
+            scale: 1.1;
+            cursor: pointer;
         }
         .centre{
             display: flex;
