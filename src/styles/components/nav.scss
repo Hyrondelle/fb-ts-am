@@ -2,6 +2,7 @@ nav{
     display: flex;
     justify-content: space-between;
     background-color: $color2;
+    border-bottom: 3px solid rgba(108, 110, 112, 0.14);
     a{
         color: rgb(40, 37, 37);
         text-decoration: none;
@@ -22,6 +23,7 @@ nav{
         display: flex;
         width: 50%;
         justify-content: flex-end;
+        color: rgb(51, 49, 49);
         button{
             width: 30px;
             border-radius: 10px;
