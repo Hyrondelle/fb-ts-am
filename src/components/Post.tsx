@@ -1,23 +1,23 @@
 
 import {FaPen} from 'react-icons/fa';
 import {BiLike, BiSolidLike } from "react-icons/bi";
-import { btnUpdate,getUser } from '../Store';
+import { getUser } from '../Store';
 import { useState } from 'react';
 import { doc ,updateDoc,collection,arrayUnion,arrayRemove} from 'firebase/firestore';
 import { db } from '../firebase.config';
 
 const Post = (props:any) => {
-    const {click,toggleBtn}:any = btnUpdate()
     const {id,pseudo}:any = getUser()
     const messagePost = props.post.message
     const fullPost = props.post
+    const [click,setClick] = useState<boolean>(false);
     const [changeMessage,setChangeMessage] = useState<string>(messagePost);
     const [addComment,setAddComment] = useState<string>('');
     const postRef = collection(db,'posts');
     const [viewComment,setViewComment] = useState<boolean>(false);
 
     const modify = () =>{
-        toggleBtn(click)
+        setClick(!click)
     }
     const viewComments = () =>{
         setViewComment(!viewComment)
