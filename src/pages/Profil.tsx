@@ -48,7 +48,7 @@ const Profil = () => {
         <div className='profil'>
           <Nav/>
           <form onSubmit={sendPhoto}>
-            <input onChange={handleChange} type="file" name="photoProfil" id="photoProfil" />
+            <input className='file' onChange={handleChange} type="file" name="photoProfil" id="photoProfil" />
             <button  type="submit">envoyer</button>
             <img id='imgProfil' src='src\assets\defautProfil.png'></img>
             <button onClick={getPhoto}>changer la photo</button>
