@@ -58,11 +58,18 @@ const Home = () => {
             <Nav/>
             <form className='newMessage' onSubmit={sendPost}>
                 <label className='form-lab' htmlFor="post">nouveau message:</label>
-                <textarea className='form-text' autoFocus onChange={(e)=>setPost(e.target.value)}  
-                       name="post" 
-                       id="post" 
-                       value={post}/>
-                <button className='form-btn' type="submit">Envoyer</button>
+                <textarea className='form-text'
+                    autoFocus onChange={(e)=>setPost(e.target.value)}  
+                    name="post" 
+                    id="post" 
+                    value={post}/>
+                <div className='photo-envoi'>
+                    <label htmlFor="addPhoto">
+                    <div className='form-btn file'>photo</div>
+                    <input type="file" name="addPhoto" id="addPhoto" />
+                    </label>
+                    <button className='form-btn' type="submit">Envoyer</button>
+                </div>
             </form>
             <ul className='posts'>
                 {

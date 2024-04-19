@@ -30,4 +30,16 @@
     textarea{
         padding: 10px 10px;
     }
+    .photo-envoi{
+        display: flex;
+    }
+    #addPhoto{
+        display: none;
+    }
+    .file{
+        margin-right: 15px;
+        border: solid 1px;
+        font-size: 0.9em;
+
+    }
 }
