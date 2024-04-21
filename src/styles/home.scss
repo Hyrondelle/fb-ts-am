@@ -27,6 +27,14 @@
     .form-btn:hover{
         background-color: rgb(209, 211, 183);
     }
+    .photo-message{
+        display: flex;
+        flex-direction: column;
+        img{
+            width: 200px;
+            height: 100px;
+        }
+    }
     textarea{
         padding: 10px 10px;
     }
