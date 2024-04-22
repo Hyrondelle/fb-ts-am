@@ -9,7 +9,7 @@ import { getUser } from '../Store';
 const Home = () => {
     const [post,setPost] = useState<string>('');
     const [listPost,setListPost] = useState<Array<any>>([]);
-    const [photo,setPhoto] = useState<any>({});
+    const [photo,setPhoto] = useState<any>();
     const postCollectionRef = collection(db,"posts");
     const idUser:any = localStorage.getItem('userId');
     const storage = getStorage();
@@ -69,8 +69,7 @@ const Home = () => {
         getPostList();
     },[listPost, postCollectionRef])
 
-    const handleChange =async 
-    (e:any) =>{
+    const handleChange =async (e:any) =>{
         setPhoto(e.target.files[0])
         const imagesRef = ref(storage, 'photos/'+id+'/'+id+'.jpg');
         uploadBytes(imagesRef, photo)
@@ -113,6 +112,7 @@ const Home = () => {
                     <div className='form-btn file'>photo</div>
                     <input onChange={handleChange} type="file" name="addPhoto" id="addPhoto" />
                     </label>
+                    {photo?<button className='btn-valid'></button>:<></>}
                     <button className='form-btn' type="submit">Envoyer</button>
                 </div>
             </form>
