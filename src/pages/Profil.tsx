@@ -8,18 +8,17 @@ const Profil = () => {
   const [photo,setPhoto] = useState<any>();
   const {id}:any = getUser();
   
-  try{
-    getDownloadURL(ref(storage, 'images/'+id+'/'+id+'.jpg'))
-        .then((url) => {
-          const img = document.getElementById('imgProfil');
-          img?.setAttribute('src', url);
-        })
-        .catch((err) =>console.log(err)
-        )
-  }
-  catch(err){
-    console.log(err);
-  }
+try{
+  getDownloadURL(ref(storage, 'images/'+id+'/'+id+'.jpg'))
+  .then((url) => {
+  const img = document.getElementById('imgProfil');
+  img?.setAttribute('src', url);
+  })
+  .catch((err) =>console.log(err))
+}
+catch(err){
+  console.log(err);
+}
 
   const sendPhoto = (e:any) =>{
     e.preventDefault()
@@ -32,6 +31,7 @@ const Profil = () => {
       .catch((e)=>console.log('pb upload'+e)
       );
     }
+    
       const getPhoto = () => {
         getDownloadURL(ref(storage, 'images/'+id+'/'+id+'.jpg'))
         .then((url) => {

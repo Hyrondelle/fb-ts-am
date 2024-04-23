@@ -15,15 +15,14 @@ const Home = () => {
     const storage = getStorage();
     const {id}:any = getUser();
     
-    const sendPhoto = (e:any) =>{
+    const getPhoto = (e:any) =>{
         e.preventDefault()
-        const imagesRef = ref(storage, 'photos/'+id+'/'+id+'.jpg');
-        uploadBytes(imagesRef, photo)
-        .then(() => {
-          console.log('file Uploaded!');
+        getDownloadURL(ref(storage, 'photos/'+id+'/'+id+'.jpg'))
+        .then((url) => {
+            const img = document.getElementById('photo');
+            img?.setAttribute('src', url);
         })
-        .catch((e)=>console.log('pb upload'+e)
-        );
+        .catch((err) =>console.log(err))
     }
 
     const sendPost = async (e:any) => {
@@ -78,18 +77,6 @@ const Home = () => {
         })
         .catch((e)=>console.log('pb upload'+e)
         );
-        try{
-            await getDownloadURL(ref(storage, 'photos/'+id+'/'+id+'.jpg'))
-                .then((url) => {
-                  const img = document.getElementById('photo');
-                  img?.setAttribute('src', url);
-                })
-                .catch((err) =>console.log(err)
-                )
-          }
-          catch(err){
-            console.log(err);
-          }
       }
     
     return (
@@ -98,7 +85,7 @@ const Home = () => {
             <form className='newMessage' onSubmit={sendPost}>
                 <label className='form-lab' htmlFor="post">nouveau message:
                 <div className='photo-message'>
-                    <img id='photo' src=''></img>
+                    <img id='photo'></img>
 
                     <textarea className='form-text'
                         autoFocus onChange={(e)=>setPost(e.target.value)}  
@@ -112,7 +99,7 @@ const Home = () => {
                     <div className='form-btn file'>photo</div>
                     <input onChange={handleChange} type="file" name="addPhoto" id="addPhoto" />
                     </label>
-                    {photo?<button className='btn-valid'></button>:<></>}
+                    {photo?<button onClick={getPhoto} className='btn-valid'></button>:<></>}
                     <button className='form-btn' type="submit">Envoyer</button>
                 </div>
             </form>
