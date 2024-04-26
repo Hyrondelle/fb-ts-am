@@ -15,10 +15,11 @@ const Home = () => {
     const storage = getStorage();
     const {id}:any = getUser();
     
-    const getPhoto = (e:any) =>{
+    const getPhoto = async(e:any) =>{
         e.preventDefault()
-        getDownloadURL(ref(storage, 'photos/'+id+'/'+id+'.jpg'))
+        await getDownloadURL(ref(storage, 'photos/'+id+'/'+id+'.jpg'))
         .then((url) => {
+            setPhoto(null)
             const img = document.getElementById('photo');
             img?.setAttribute('src', url);
         })
@@ -68,15 +69,12 @@ const Home = () => {
         getPostList();
     },[listPost, postCollectionRef])
 
-    const handleChange =async (e:any) =>{
-        setPhoto(e.target.files[0])
-        const imagesRef = ref(storage, 'photos/'+id+'/'+id+'.jpg');
-        uploadBytes(imagesRef, photo)
-        .then(() => {
-          console.log('file Uploaded!');
-        })
-        .catch((e)=>console.log('pb upload'+e)
-        );
+    const handleChange =(event:any) =>{
+        if (event.target.files && event.target.files[0]) {
+            setPhoto(URL.createObjectURL(event.target.files[0]));
+            console.log(photo)
+          }
+        
       }
     
     return (
@@ -85,7 +83,7 @@ const Home = () => {
             <form className='newMessage' onSubmit={sendPost}>
                 <label className='form-lab' htmlFor="post">nouveau message:
                 <div className='photo-message'>
-                    <img id='photo'></img>
+                    <img id='photo' src={photo}></img>
 
                     <textarea className='form-text'
                         autoFocus onChange={(e)=>setPost(e.target.value)}  
