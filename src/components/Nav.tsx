@@ -8,11 +8,11 @@ const Nav = () => {
   const {pseudo}:any = getUser();
     return (
         <nav>
-          {(window.location.pathname=='/home')?<Link to="/profil">profil</Link>:<Link to="/home">home</Link>}
+          {(window.location.pathname=='/home')?<Link aria-label='go profil page' to="/profil">profil</Link>:<Link to="/home">home</Link>}
           {(pseudo?
           <div className="pseudo-exit">
             <h1>Bonjour {pseudo}</h1>
-            <button onClick={Logout}><ImExit className='exit'/></button>
+            <button onClick={Logout}><ImExit aria-label='deconnexion' className='exit'/></button>
           </div>:<></>
           )}
         </nav>

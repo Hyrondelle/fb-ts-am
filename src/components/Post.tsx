@@ -86,7 +86,7 @@ const Post = (props:any) => {
 
     return (
         <div className='post'>   
-            <div className='author'>{'@'+fullPost.author.pseudo}</div> 
+            <div aria-label='author' className='author'>{'@'+fullPost.author.pseudo}</div> 
             <div className='post-contain'>
                 {(!click||id+messagePost[0]+messagePost[1]!==fullPost.id)?(<div>{messagePost}</div>):
                 (<form onSubmit={sendNewMessage}>
@@ -95,8 +95,8 @@ const Post = (props:any) => {
                         onChange={(e)=>setChangeMessage(e.target.value)}>
                     </textarea>
                     <div>
-                        <button className='btn' type="submit">modifier</button>
-                        <button className='btn' onClick={deletePost}>effacer</button>
+                        <button className='btn' aria-label='modify post' type="submit">modifier</button>
+                        <button className='btn' aria-label='delete post' onClick={deletePost}>effacer</button>
                     </div>
                 </form>)}
             </div>
@@ -105,11 +105,13 @@ const Post = (props:any) => {
                     <div className='buttons'>
                     <div onClick={Likes} 
                         className='like btn centre'>
-                            {fullPost.likes+' '} {fullPost.idLikes.includes(id)?<BiSolidLike/>:<BiLike/>}</div>
+                            {fullPost.likes+' '} {fullPost.idLikes.includes(id)?<BiSolidLike aria-label='like'/>:<BiLike aria-label='unlike'/>}</div>
                     <div className='comment btn centre'
                         onClick={viewComments}>{fullPost.nbComments} comments</div>
                     <div className='partage btn centre'>partage</div>
-                    {(id===fullPost.author.id)?(<button className='btn-modif' onClick={modify}><FaPen/></button>):(<div></div>)}
+                    {(id===fullPost.author.id)?(<button className='btn-modif' 
+                        aria-label='modify or delete post'
+                        onClick={modify}><FaPen/></button>):(<div></div>)}
                     </div>
                 </div> 
                 <div className='align-comments'>
@@ -120,7 +122,7 @@ const Post = (props:any) => {
                     id="comments" 
                     value={addComment}
                     onChange={(e)=>setAddComment(e.target.value)} />
-                    <button className='btn' type="submit">comment</button>
+                    <button className='btn' aria-label='add commentary' type="submit">comment</button>
                     </form>
                 </div>
                 {viewComment?

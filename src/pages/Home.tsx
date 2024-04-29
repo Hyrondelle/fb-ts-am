@@ -72,7 +72,6 @@ const Home = () => {
     const handleChange =(event:any) =>{
         if (event.target.files && event.target.files[0]) {
             setPhoto(URL.createObjectURL(event.target.files[0]));
-            console.log(photo)
           }
         
       }
@@ -83,7 +82,7 @@ const Home = () => {
             <form className='newMessage' onSubmit={sendPost}>
                 <label className='form-lab' htmlFor="post">nouveau message:
                 <div className='photo-message'>
-                    <img id='photo' src={photo}></img>
+                    {photo?<img alt='photo' id='photo' src={photo}></img>:<></>}
 
                     <textarea className='form-text'
                         autoFocus onChange={(e)=>setPost(e.target.value)}  
@@ -95,9 +94,10 @@ const Home = () => {
                 <div className='photo-envoi'>
                     <label htmlFor="addPhoto">
                     <div className='form-btn file'>photo</div>
-                    <input onChange={handleChange} type="file" name="addPhoto" id="addPhoto" />
+                    <input onChange={handleChange} type="file" 
+                        aria-label='choose picture'
+                        name="addPhoto" id="addPhoto" />
                     </label>
-                    {photo?<button onClick={getPhoto} className='btn-valid'></button>:<></>}
                     <button className='form-btn' type="submit">Envoyer</button>
                 </div>
             </form>
