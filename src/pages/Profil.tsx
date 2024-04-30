@@ -9,7 +9,7 @@ const Profil = () => {
   const {id}:any = getUser();
   
 try{
-  getDownloadURL(ref(storage, 'images/'+id+'/'+id+'.jpg'))
+  getDownloadURL(ref(storage, 'profil/'+id+'/'+id+'.jpg'))
   .then((url) => {
   const img = document.getElementById('imgProfil');
   img?.setAttribute('src', url);
@@ -22,7 +22,7 @@ catch(err){
 
   const sendPhoto = (e:any) =>{
     e.preventDefault()
-      const imagesRef = ref(storage, 'images/'+id+'/'+id+'.jpg');
+      const imagesRef = ref(storage, 'profil/'+id+'/'+id+'.jpg');
       uploadBytes(imagesRef, photo)
       .then(() => {
       console.log('Uploaded a blob or file!');
@@ -33,7 +33,7 @@ catch(err){
     }
     
       const getPhoto = () => {
-        getDownloadURL(ref(storage, 'images/'+id+'/'+id+'.jpg'))
+        getDownloadURL(ref(storage, 'profil/'+id+'/'+id+'.jpg'))
         .then((url) => {
           const img = document.getElementById('imgProfil');
           img?.setAttribute('src', url);

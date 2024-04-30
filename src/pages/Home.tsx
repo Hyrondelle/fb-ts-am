@@ -15,17 +15,6 @@ const Home = () => {
     const storage = getStorage();
     const {id}:any = getUser();
     
-    const getPhoto = async(e:any) =>{
-        e.preventDefault()
-        await getDownloadURL(ref(storage, 'photos/'+id+'/'+id+'.jpg'))
-        .then((url) => {
-            setPhoto(null)
-            const img = document.getElementById('photo');
-            img?.setAttribute('src', url);
-        })
-        .catch((err) =>console.log(err))
-    }
-
     const sendPost = async (e:any) => {
         e.preventDefault();
         if(post.length<3){
@@ -52,19 +41,29 @@ const Home = () => {
                     setPost('');
                 })
                 .catch((err:any)=>{
-                console.log(err);
+                    console.log(err);
                 })
             })
             .catch((err:any)=>{
                 console.log(err);
             })
         }
+        if(photo&&post.length>=3){
+            const imagesRef = ref(storage, 'photos/'+idUser+post[0]+post[1]+'/'+id+'.jpg');
+            uploadBytes(imagesRef, photo)
+            .then(() => {
+                console.log('Uploaded a blob or file!');
+            })
+            .catch((e)=>console.log('pb upload'+e));
+        }
+        else{
+            console.log('vous devez écrire un message');
+        }
     }
     useEffect(()=>{
         const getPostList = async () => {
             const data = await getDocs(postCollectionRef);
             setListPost(data.docs);
-            
         }
         getPostList();
     },[listPost, postCollectionRef])
@@ -73,7 +72,6 @@ const Home = () => {
         if (event.target.files && event.target.files[0]) {
             setPhoto(URL.createObjectURL(event.target.files[0]));
           }
-        
       }
     
     return (
