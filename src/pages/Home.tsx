@@ -1,7 +1,7 @@
 import { useEffect, useState} from 'react';
 import Post from '../components/Post';
 import { getDocs, collection, doc ,setDoc, getDoc,updateDoc } from 'firebase/firestore';
-import { getStorage, ref,uploadBytes,getDownloadURL } from "firebase/storage";
+import { getStorage, ref,uploadBytes } from "firebase/storage";
 import { db } from '../firebase.config';
 import Nav from '../components/Nav';
 import { getUser } from '../Store';

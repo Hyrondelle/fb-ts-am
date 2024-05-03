@@ -17,7 +17,14 @@ const Post = (props:any) => {
     const [addComment,setAddComment] = useState<string>('');
     const postRef = collection(db,'posts');
     const [viewComment,setViewComment] = useState<boolean>(false);
-    const [photo,setPhoto] = useState<boolean>(false);
+    
+    if(fullPost.photo){
+        getDownloadURL(ref(storage, 'profil/'+id+'/'+id+'.jpg'))
+        .then((url) => {
+            const img = document.getElementsByName('photo-post');
+            img?.setAttribute('src', url);
+        })
+    }
 
     const modify = () =>{
         setClick(!click)
@@ -90,7 +97,7 @@ const Post = (props:any) => {
     return (
         <div className='post'>   
             <div aria-label='author' className='author'>{'@'+fullPost.author.pseudo}</div> 
-            {photo?<img id='photo-post'></img>:<></>}
+            {fullPost.photo?<img className='photo-post'></img>:<></>}
             <div className='post-contain'>
                 {(!click||id+messagePost[0]+messagePost[1]!==fullPost.id)?(<div>{messagePost}</div>):
                 (<form onSubmit={sendNewMessage}>
