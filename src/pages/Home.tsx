@@ -1,6 +1,6 @@
 import { useEffect, useState} from 'react';
 import Post from '../components/Post';
-import { getDocs, collection, doc ,setDoc, getDoc } from 'firebase/firestore';
+import { getDocs, collection, doc ,setDoc, getDoc,updateDoc } from 'firebase/firestore';
 import { getStorage, ref,uploadBytes,getDownloadURL } from "firebase/storage";
 import { db } from '../firebase.config';
 import Nav from '../components/Nav';
@@ -35,7 +35,9 @@ const Home = () => {
                     nbComments:0,
                     comments:[],
                     date:new Date,
-                    author:{pseudo:pseudoResp, id: idRep}})
+                    author:{pseudo:pseudoResp, id: idRep},
+                    photo:false
+                })
                 .then(()=>{  
                     console.log("post envoyé"); 
                     setPost('');
@@ -49,10 +51,13 @@ const Home = () => {
             })
         }
         if(photo&&post.length>=3){
-            const imagesRef = ref(storage, 'photos/'+idUser+post[0]+post[1]+'/'+id+'.jpg');
+            updateDoc(doc(postCollectionRef,idUser+post[0]+post[1]),{photo:true})
+            
+            const imagesRef = ref(storage, 'photos/'+idUser+post[0]+post[1]+'/'+idUser+post[0]+post[1]+'.jpg');
             uploadBytes(imagesRef, photo)
             .then(() => {
                 console.log('Uploaded a blob or file!');
+                setPhoto(null)
             })
             .catch((e)=>console.log('pb upload'+e));
         }
@@ -86,7 +91,7 @@ const Home = () => {
                         autoFocus onChange={(e)=>setPost(e.target.value)}  
                         name="post" 
                         id="post" 
-                        value={post[0]}/>
+                        value={post}/>
                 </div>
                 </label>
                 <div className='photo-envoi'>

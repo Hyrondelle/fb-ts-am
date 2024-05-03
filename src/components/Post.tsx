@@ -3,11 +3,13 @@ import {FaPen} from 'react-icons/fa';
 import {BiLike, BiSolidLike } from "react-icons/bi";
 import { getUser } from '../Store';
 import { useState } from 'react';
+import { getStorage, ref,getDownloadURL } from "firebase/storage";
 import { doc ,updateDoc,collection,arrayUnion,arrayRemove,deleteDoc} from 'firebase/firestore';
 import { db } from '../firebase.config';
 
 const Post = (props:any) => {
     const {id,pseudo}:any = getUser()
+    const storage = getStorage();
     const messagePost = props.post.message
     const fullPost = props.post
     const [click,setClick] = useState<boolean>(false);
@@ -15,6 +17,7 @@ const Post = (props:any) => {
     const [addComment,setAddComment] = useState<string>('');
     const postRef = collection(db,'posts');
     const [viewComment,setViewComment] = useState<boolean>(false);
+    const [photo,setPhoto] = useState<boolean>(false);
 
     const modify = () =>{
         setClick(!click)
@@ -87,6 +90,7 @@ const Post = (props:any) => {
     return (
         <div className='post'>   
             <div aria-label='author' className='author'>{'@'+fullPost.author.pseudo}</div> 
+            {photo?<img id='photo-post'></img>:<></>}
             <div className='post-contain'>
                 {(!click||id+messagePost[0]+messagePost[1]!==fullPost.id)?(<div>{messagePost}</div>):
                 (<form onSubmit={sendNewMessage}>
