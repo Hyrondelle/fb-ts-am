@@ -1,6 +1,6 @@
 import { useEffect, useState} from 'react';
 import Post from '../components/Post';
-import { getDocs, collection, doc ,setDoc, getDoc,updateDoc } from 'firebase/firestore';
+import { getDocs, collection, doc ,setDoc } from 'firebase/firestore';
 import { getStorage, ref,uploadBytes } from "firebase/storage";
 import { db } from '../firebase.config';
 import Nav from '../components/Nav';
@@ -13,58 +13,62 @@ const Home = () => {
     const postCollectionRef = collection(db,"posts");
     const idUser:any = localStorage.getItem('userId');
     const storage = getStorage();
-    const {id}:any = getUser();
+    const {id,pseudo}:any = getUser();
     
     const sendPost = async (e:any) => {
         e.preventDefault();
         if(post.length<3){
             console.log('3 lettres minimum'); 
         }
-        else{
-            const userRef = doc(db,'users',idUser);
-            await getDoc(userRef)
-            .then((userResp:any)=>{
-                console.log(userResp);
-                const user = userResp.data();
-                const pseudoResp = user.pseudo;
-                const idRep = user.userId
-                setDoc(doc(postCollectionRef,idRep+post[0]+post[1]),{message:post,
-                    id:idRep+post[0]+post[1],
-                    likes:0,
-                    idLikes:[],
-                    nbComments:0,
-                    comments:[],
-                    date:new Date,
-                    author:{pseudo:pseudoResp, id: idRep},
-                    photo:false
-                })
-                .then(()=>{  
-                    console.log("post envoyé"); 
-                    setPost('');
-                })
-                .catch((err:any)=>{
-                    console.log(err);
-                })
+        else if(photo){
+            const imagesRef = ref(storage, 'photos/'+idUser+post[0]+post[1]+'/'+idUser+post[0]+post[1]+'.jpg');
+            uploadBytes(imagesRef, photo)
+            .then(() => {
+                console.log('Uploaded a blob or file!');
+            })
+            .catch((e)=>console.log('pb upload'+e));
+
+            setDoc(doc(postCollectionRef,id+post[0]+post[1]),{message:post,
+                id:id+post[0]+post[1],
+                likes:0,
+                idLikes:[],
+                nbComments:0,
+                comments:[],
+                date:new Date,
+                author:{pseudo:pseudo, id: id},
+                photo:true
+            })
+            .then(()=>{  
+                console.log("post envoyé"); 
+                setPost('');
+                setPhoto(null)
             })
             .catch((err:any)=>{
                 console.log(err);
             })
         }
-        if(photo&&post.length>=3){
-            updateDoc(doc(postCollectionRef,idUser+post[0]+post[1]),{photo:true})
-            
-            const imagesRef = ref(storage, 'photos/'+idUser+post[0]+post[1]+'/'+idUser+post[0]+post[1]+'.jpg');
-            uploadBytes(imagesRef, photo)
-            .then(() => {
-                console.log('Uploaded a blob or file!');
-                setPhoto(null)
-            })
-            .catch((e)=>console.log('pb upload'+e));
-        }
         else{
-            console.log('vous devez écrire un message');
+            setDoc(doc(postCollectionRef,id+post[0]+post[1]),{message:post,
+                id:id+post[0]+post[1],
+                likes:0,
+                idLikes:[],
+                nbComments:0,
+                comments:[],
+                date:new Date,
+                author:{pseudo:pseudo, id: id},
+                photo:false
+            })
+            .then(()=>{  
+                console.log("post envoyé"); 
+                setPost('');
+            })
+            .catch((err:any)=>{
+                console.log(err);
+            })
         }
+        
     }
+        
     useEffect(()=>{
         const getPostList = async () => {
             const data = await getDocs(postCollectionRef);
