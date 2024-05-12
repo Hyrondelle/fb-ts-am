@@ -10,19 +10,20 @@ const Home = () => {
     const [post,setPost] = useState<string>('');
     const [listPost,setListPost] = useState<Array<any>>([]);
     const [photo,setPhoto] = useState<any>();
+    const [photoSend,setPhotoSend] = useState<any>();
     const postCollectionRef = collection(db,"posts");
     const idUser:any = localStorage.getItem('userId');
     const storage = getStorage();
     const {id,pseudo}:any = getUser();
     
-    const sendPost = async (e:any) => {
+    const sendPost = (e:any) => {
         e.preventDefault();
         if(post.length<3){
             console.log('3 lettres minimum'); 
         }
-        else if(photo){
+        else if(photoSend){
             const imagesRef = ref(storage, 'photos/'+idUser+post[0]+post[1]+'/'+idUser+post[0]+post[1]+'.jpg');
-            uploadBytes(imagesRef, photo)
+            uploadBytes(imagesRef, photoSend)
             .then(() => {
                 console.log('Uploaded a blob or file!');
             })
@@ -83,6 +84,7 @@ const Home = () => {
     const handleChange =(event:any) =>{
         if (event.target.files && event.target.files[0]) {
             setPhoto(URL.createObjectURL(event.target.files[0]));
+            setPhotoSend(event.target.files[0]);
           }
       }
     
