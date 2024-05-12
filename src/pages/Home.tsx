@@ -69,12 +69,15 @@ const Home = () => {
         
     }
         
+
     useEffect(()=>{
-        const getPostList = async () => {
-            const data = await getDocs(postCollectionRef);
-            setListPost(data.docs);
-        }
-        getPostList();
+        
+            getDocs(postCollectionRef)
+            .then((data)=>{
+                setListPost(data.docs);
+            })
+            
+        
     },[listPost, postCollectionRef])
 
     const handleChange =(event:any) =>{
