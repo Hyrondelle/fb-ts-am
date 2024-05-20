@@ -1,6 +1,5 @@
 .post{
     background-color: $color2;
-    width: 500px;
     min-height: 100px;
     margin: 40px auto;
     color: black;
@@ -94,14 +93,14 @@
     }
     @media screen and (max-width: 1000px){
         //height: 300px;
-        width: 400px;
+       // width: 400px;
     }
     @media screen and (min-width: 1000px){
-        margin-bottom: 60px;
+        //margin-bottom: 60px;
     }
     @media screen and (min-width: 2000px){
         //height: 400px;
-        width: 1000px;
+        //width: 1000px;
     }
     .like{
         cursor: pointer;

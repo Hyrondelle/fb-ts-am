@@ -1,6 +1,13 @@
 .home{
     background-color: $color4 ;
     height: 100%;
+    .contentx3{
+        width: 100%;
+        display: flex;
+    }
+    .posts-middle{
+        width: 33%;
+    }
     .newMessage{
         display: flex;
         flex-direction: column;

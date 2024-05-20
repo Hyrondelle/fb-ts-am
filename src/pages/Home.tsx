@@ -1,10 +1,12 @@
 import { useEffect, useState} from 'react';
 import Post from '../components/Post';
+import Friends from '../components/Friends';
 import { getDocs, collection, doc ,setDoc } from 'firebase/firestore';
 import { getStorage, ref,uploadBytes } from "firebase/storage";
 import { db } from '../firebase.config';
 import Nav from '../components/Nav';
 import { getUser } from '../Store';
+import OtherPeople from '../components/OtherPeople';
 
 const Home = () => {
     const [post,setPost] = useState<string>('');
@@ -91,33 +93,39 @@ const Home = () => {
     return (
         <div className='home'>
             <Nav/>
-            <form className='newMessage' onSubmit={sendPost}>
-                <label className='form-lab' htmlFor="post">nouveau message:
-                <div className='photo-message'>
-                    {photo?<img alt='photo' id='photo' src={photo}></img>:<></>}
+            <div className="contentx3">
+                <Friends/>
+                <div className="posts-middle">
+                    <form className='newMessage' onSubmit={sendPost}>
+                        <label className='form-lab' htmlFor="post">nouveau message:
+                        <div className='photo-message'>
+                            {photo?<img alt='photo' id='photo' src={photo}></img>:<></>}
 
-                    <textarea className='form-text'
-                        autoFocus onChange={(e)=>setPost(e.target.value)}  
-                        name="post" 
-                        id="post" 
-                        value={post}/>
+                            <textarea className='form-text'
+                            autoFocus onChange={(e)=>setPost(e.target.value)}  
+                            name="post" 
+                            id="post" 
+                            value={post}/>
+                        </div>
+                        </label>
+                        <div className='photo-envoi'>
+                            <label htmlFor="addPhoto">
+                        <div className='form-btn file'>photo</div>
+                        <input onChange={handleChange} type="file" 
+                            aria-label='choose picture'
+                            name="addPhoto" id="addPhoto" />
+                        </label>
+                        <button className='form-btn' type="submit">Envoyer</button>
+                        </div>
+                    </form>
+                    <ul className='posts'>
+                    {
+                        listPost.map((post)=><Post post={post.data()} key={post.id}/>)
+                    }
+                    </ul>
                 </div>
-                </label>
-                <div className='photo-envoi'>
-                    <label htmlFor="addPhoto">
-                    <div className='form-btn file'>photo</div>
-                    <input onChange={handleChange} type="file" 
-                        aria-label='choose picture'
-                        name="addPhoto" id="addPhoto" />
-                    </label>
-                    <button className='form-btn' type="submit">Envoyer</button>
-                </div>
-            </form>
-            <ul className='posts'>
-                {
-                    listPost.map((post)=><Post post={post.data()} key={post.id}/>)
-                }
-            </ul>
+                <OtherPeople/>
+            </div>
         </div>
     );
 };
