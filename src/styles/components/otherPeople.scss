@@ -1,5 +1,34 @@
 .otherPeople{
     width: 33%;
-    background-color: crimson;
-    height: 400px;
+    height: 600px;
+    h2{
+        margin:10px auto 0 20%;
+    }
+    ul{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 30px;
+    }
+    li{
+        width: 80%;
+        display: flex;
+        margin: 10px auto;
+        align-items: center;
+        justify-content: space-around;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        border-radius: 15px;
+    }
+    li:hover{
+        cursor: pointer;
+        scale: 1.05;
+    }
+    img{
+        padding: 2px;
+        margin-left: 50px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50px;
+        object-fit: cover;
+    }
 }
