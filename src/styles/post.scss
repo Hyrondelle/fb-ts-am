@@ -10,8 +10,10 @@
         padding: 8px;
     }
     .photopost{
-        width: 100px;
-        height: 100px;
+        width: 70%;
+        height: 200px;
+        margin-left: 20px;
+        object-fit: contain;
     }
     .author{
         margin-left: 8px;
