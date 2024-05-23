@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 //import { db,auth } from '../firebase.config';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { getUser } from '../Store';
+import { FirebaseError } from 'firebase/app';
 
 const Login = () => {
     const auth = getAuth();
@@ -17,7 +18,7 @@ const Login = () => {
     const passwordError:HTMLElement =document.querySelector('.passwordError') as HTMLElement;
     const dbError:HTMLElement =document.querySelector('.passwordError') as HTMLElement;
 
-    const SubmitLogin = async(e:any) =>{
+    const SubmitLogin = async(e:React.MouseEvent<HTMLInputElement>) =>{
         e.preventDefault();
         dbError.innerHTML='';
         if(!emailRegex.test(email)){
@@ -41,7 +42,7 @@ const Login = () => {
                 navigate("/home")
                 // ...
                 })
-                .catch((error:any) => {
+                .catch((error:FirebaseError) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode,errorMessage);

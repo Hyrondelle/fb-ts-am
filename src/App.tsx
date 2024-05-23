@@ -7,7 +7,7 @@ import Profil from "./pages/Profil";
 
 function App() {
   const navigate = useNavigate();
-  const [Uid,setUid] = useState<any>('');
+  const [Uid,setUid] = useState<string|null>('');
   const {checkUser}:any = getUser()
   
   useEffect(()=>{
@@ -20,7 +20,7 @@ function App() {
     else{
       navigate('/')
     }
-  },[Uid, checkUser])
+  },[Uid, checkUser,navigate])
  
   return (
       <div>

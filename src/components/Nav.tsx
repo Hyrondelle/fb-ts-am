@@ -7,18 +7,20 @@ import Logout from './Logout';
 const Nav = () => {
   const storage = getStorage(); 
   const {pseudo,id}:any = getUser();
+  if(pseudo){
+    try{
+      getDownloadURL(ref(storage, 'profil/'+id+'/'+id+'.jpg'))
+      .then((url) => {
+      const img = document.getElementById('profilNav');
+      img?.setAttribute('src', url);
+      })
+      .catch((err) =>console.log(err))
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
   
-  try{
-    getDownloadURL(ref(storage, 'profil/'+id+'/'+id+'.jpg'))
-    .then((url) => {
-    const img = document.getElementById('profilNav');
-    img?.setAttribute('src', url);
-    })
-    .catch((err) =>console.log(err))
-  }
-  catch(err){
-    console.log(err);
-  }
 
     return (
         <nav>

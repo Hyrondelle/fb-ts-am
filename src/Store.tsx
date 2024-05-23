@@ -2,11 +2,11 @@ import {create} from 'zustand';
 import { DocumentData, doc ,getDoc } from 'firebase/firestore';
 import { db } from '../src/firebase.config';
 
-export const getUser = create((set)=>({
+export const getUser:()=>void = create((set)=>({
     email:'email@mail.fr',
     id:'',
     pseudo:'',
-    async checkUser(userId:any){
+    async checkUser(userId:string){
         const userRef = doc(db,'users',userId);
         await getDoc(userRef)
         .then((rep:DocumentData)=>{

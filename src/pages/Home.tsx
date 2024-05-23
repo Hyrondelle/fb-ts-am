@@ -18,7 +18,7 @@ const Home = () => {
     const storage = getStorage();
     const {id,pseudo}:any = getUser();
     
-    const sendPost = (e:any) => {
+    const sendPost = (e:React.FormEvent<HTMLFormElement> ) => {
         e.preventDefault();
         if(post.length<3){
             console.log('3 lettres minimum'); 
@@ -46,7 +46,7 @@ const Home = () => {
                 setPost('');
                 setPhoto(null)
             })
-            .catch((err:any)=>{
+            .catch((err:string)=>{
                 console.log(err);
             })
         }
@@ -65,7 +65,7 @@ const Home = () => {
                 console.log("post envoyé"); 
                 setPost('');
             })
-            .catch((err:any)=>{
+            .catch((err:string)=>{
                 console.log(err);
             })
         }
@@ -83,7 +83,7 @@ const Home = () => {
         
     },[listPost, postCollectionRef])
 
-    const handleChange =(event:any) =>{
+    const handleChange =(event:React.ChangeEvent<HTMLInputElement>) =>{
         if (event.target.files && event.target.files[0]) {
             setPhoto(URL.createObjectURL(event.target.files[0]));
             setPhotoSend(event.target.files[0]);
