@@ -2,13 +2,13 @@ import {Routes,Route,useNavigate} from "react-router-dom";
 import Connection from "./pages/Connection";
 import Home from "./pages/Home";
 import { useState,useEffect} from "react";
-import { getUser } from "./Store";
+import { UserType, getUser } from "./Store";
 import Profil from "./pages/Profil";
 
 function App() {
   const navigate = useNavigate();
-  const [Uid,setUid] = useState<string|null>('');
-  const {checkUser}:any = getUser()
+  const [Uid,setUid] = useState<string>('');
+  const {checkUser}:UserType = getUser()
   
   useEffect(()=>{
     if(localStorage.getItem('userId')){

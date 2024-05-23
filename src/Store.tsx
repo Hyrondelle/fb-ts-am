@@ -2,7 +2,13 @@ import {create} from 'zustand';
 import { DocumentData, doc ,getDoc } from 'firebase/firestore';
 import { db } from '../src/firebase.config';
 
-export const getUser:()=>void = create((set)=>({
+export type UserType={
+  email:string;
+  id:string;
+  pseudo:string;
+  checkUser:(userId:string)=>void
+}
+export const getUser = create<UserType>((set)=>({
     email:'email@mail.fr',
     id:'',
     pseudo:'',

@@ -1,7 +1,7 @@
 import { useEffect, useState} from 'react';
 import Post from '../components/Post';
 import Friends from '../components/Friends';
-import { getDocs, collection, doc ,setDoc } from 'firebase/firestore';
+import { getDocs, collection, doc ,setDoc, DocumentData } from 'firebase/firestore';
 import { getStorage, ref,uploadBytes } from "firebase/storage";
 import { db } from '../firebase.config';
 import Nav from '../components/Nav';
@@ -10,11 +10,11 @@ import OtherPeople from '../components/OtherPeople';
 
 const Home = () => {
     const [post,setPost] = useState<string>('');
-    const [listPost,setListPost] = useState<Array<any>>([]);
-    const [photo,setPhoto] = useState<any>();
-    const [photoSend,setPhotoSend] = useState<any>();
+    const [listPost,setListPost] = useState<Array<DocumentData>>([]);
+    const [photo,setPhoto] = useState<string|null>();
+    const [photoSend,setPhotoSend] = useState<Blob>();
     const postCollectionRef = collection(db,"posts");
-    const idUser:any = localStorage.getItem('userId');
+    const idUser:string|null = localStorage.getItem('userId');
     const storage = getStorage();
     const {id,pseudo}:any = getUser();
     
