@@ -13,14 +13,21 @@ export const getUser = create<UserType>((set)=>({
     id:'',
     pseudo:'',
     async checkUser(userId:string){
-        const userRef = doc(db,'users',userId);
-        await getDoc(userRef)
+        if(!userId){
+          console.log('vérifiez que vous êtes connecté');
+        }
+        else{
+          const userRef = doc(db,'users',userId);
+        getDoc(userRef)
         .then((rep:DocumentData)=>{
           const repObj = rep.data()
           set({email:repObj.email,pseudo:repObj.pseudo,id:rep.id})
+          console.log('vous êtes connecté')
         })
         .catch((e)=>console.log(e)
         )
+        }
+        
     }
 })
 )
