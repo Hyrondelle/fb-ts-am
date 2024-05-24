@@ -13,7 +13,11 @@ function App() {
   useEffect(()=>{
     if(localStorage.getItem('userId')){
       const checkId = localStorage.getItem('userId');
-      setUid(checkId)
+      if(checkId!==null){
+        const idValue:string = checkId
+        setUid(idValue)
+      }
+      
       checkUser(Uid)
       navigate('/home')
     }
