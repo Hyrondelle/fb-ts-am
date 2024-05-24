@@ -1,12 +1,12 @@
 import {Link} from 'react-router-dom'
 import {ImExit} from 'react-icons/im'
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { getUser } from '../Store';
+import { UserType, getUser } from '../Store';
 import Logout from './Logout';
 
 const Nav = () => {
   const storage = getStorage(); 
-  const {pseudo,id}:any = getUser();
+  const {pseudo,id}:UserType = getUser();
   if(pseudo){
     try{
       getDownloadURL(ref(storage, 'profil/'+id+'/'+id+'.jpg'))

@@ -5,7 +5,7 @@ import { getDocs, collection, doc ,setDoc, DocumentData } from 'firebase/firesto
 import { getStorage, ref,uploadBytes } from "firebase/storage";
 import { db } from '../firebase.config';
 import Nav from '../components/Nav';
-import { getUser } from '../Store';
+import { UserType, getUser } from '../Store';
 import OtherPeople from '../components/OtherPeople';
 
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
     const postCollectionRef = collection(db,"posts");
     const idUser:string|null = localStorage.getItem('userId');
     const storage = getStorage();
-    const {id,pseudo}:any = getUser();
+    const {id,pseudo}:UserType = getUser();
     
     const sendPost = (e:React.FormEvent<HTMLFormElement> ) => {
         e.preventDefault();
@@ -120,7 +120,7 @@ const Home = () => {
                     </form>
                     <ul className='posts'>
                     {
-                        listPost.map((post)=><Post post={post.data()} key={post.id}/>)
+                        listPost.map((post:DocumentData)=><Post post={post.data()} key={post.id}/>)
                     }
                     </ul>
                 </div>

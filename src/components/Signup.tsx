@@ -21,7 +21,7 @@ const Signup = () => {
     const passwordError:HTMLElement =document.querySelector('.passwordError') as HTMLElement;
     const verifError:HTMLElement =document.querySelector('.verifError') as HTMLElement;
 
-    const SubmitSignup = async(e:any) =>{
+    const SubmitSignup = async(e:React.MouseEvent<HTMLInputElement>) =>{
         e.preventDefault();
         if(pseudo.length< 6){
             pseudoError.innerHTML='6 caractères min';

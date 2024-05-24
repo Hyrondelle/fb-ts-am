@@ -1,14 +1,14 @@
 
 import {FaPen} from 'react-icons/fa';
 import {BiLike, BiSolidLike } from "react-icons/bi";
-import { getUser } from '../Store';
+import { UserType, getUser } from '../Store';
 import { useState } from 'react';
 import { getStorage, ref,getDownloadURL } from "firebase/storage";
-import { doc ,updateDoc,collection,arrayUnion,arrayRemove,deleteDoc} from 'firebase/firestore';
+import { doc ,updateDoc,collection,arrayUnion,arrayRemove,deleteDoc, DocumentData} from 'firebase/firestore';
 import { db } from '../firebase.config';
 
-const Post = (props:any) => {
-    const {id,pseudo}:any = getUser()
+const Post = (props:DocumentData) => {
+    const {id,pseudo}:UserType = getUser()
     const storage = getStorage();
     const messagePost = props.post.message
     const fullPost = props.post
@@ -32,14 +32,14 @@ const Post = (props:any) => {
     const viewComments = () =>{
         setViewComment(!viewComment)
     }
-    const Likes = async(e:any) =>{
+    const Likes = async(e:React.MouseEvent<HTMLInputElement>) =>{
         e.preventDefault();
         if(fullPost.idLikes.includes(id)){
             await updateDoc(doc(postRef,fullPost.id),{idLikes:arrayRemove(id),likes:fullPost.likes-1})
             .then(()=>{  
                 console.log("like enlevé");   
             })
-            .catch((err:any)=>{
+            .catch((err:string)=>{
             console.log(err);
             })
         }
@@ -48,35 +48,35 @@ const Post = (props:any) => {
             .then(()=>{  
                 console.log("commentaire liké");   
             })
-            .catch((err:any)=>{
+            .catch((err:string)=>{
             console.log(err);
             })
         }
         
     }
         
-    const sendNewMessage = async(e:any) =>{
+    const sendNewMessage = async(e:React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault();
         await updateDoc(doc(postRef,id+messagePost[0]+messagePost[1]),{message:changeMessage})
             .then(()=>{  
                 console.log("post modifié");   
                 setClick(!click)
             })
-            .catch((err:any)=>{
+            .catch((err:string)=>{
             console.log(err);
             })
     }
-    const deletePost = async(e:any) =>{
+    const deletePost = async(e:React.MouseEvent<HTMLButtonElement>) =>{
         e.preventDefault();
         await deleteDoc(doc(postRef,id+messagePost[0]+messagePost[1]))
             .then(()=>{  
                 console.log("post effacé");   
             })
-            .catch((err:any)=>{
+            .catch((err:string)=>{
             console.log(err);
             })
     }
-    const newComment = async(e:any) =>{
+    const newComment = async(e:React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault();
         if(addComment.length==0){
             console.log('veuillez écrire un commentaire');
@@ -87,7 +87,7 @@ const Post = (props:any) => {
                 console.log("commentaire envoyé");
                 setAddComment('')   
             })
-            .catch((err:any)=>{
+            .catch((err:string)=>{
             console.log(err);
             })
         }
@@ -140,7 +140,7 @@ const Post = (props:any) => {
                 <ul className='commentaires'>
                 {
                     fullPost.comments
-                    .map((comment:any)=>
+                    .map((comment:DocumentData)=>
                     <li key={comment.id}><div>{'@'+comment.pseudo}</div><div>{comment.addComment}</div></li>)
                 }
                 </ul>:<></>}

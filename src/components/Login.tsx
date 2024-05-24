@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 //import { db,auth } from '../firebase.config';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { getUser } from '../Store';
+import { UserType, getUser } from '../Store';
 import { FirebaseError } from 'firebase/app';
 
 const Login = () => {
     const auth = getAuth();
-    const {checkUser}:any = getUser();
+    const {checkUser}:UserType = getUser();
     const [email,setEmail] = useState<string>('');
     const [password,setPassword] = useState<string>('');
     const navigate = useNavigate();
