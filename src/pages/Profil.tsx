@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { getStorage, ref,uploadBytes,getDownloadURL } from "firebase/storage";
-import { getUser } from '../Store';
+import { UserType, getUser } from '../Store';
 import Nav from '../components/Nav';
 
 const Profil = () => {
   const storage = getStorage();  
-  const [photo,setPhoto] = useState<any>();
-  const {id}:any = getUser();
+  const [photo,setPhoto] = useState<Blob>();
+  const {id}:UserType = getUser();
   
 try{
   getDownloadURL(ref(storage, 'profil/'+id+'/'+id+'.jpg'))
@@ -20,9 +20,10 @@ catch(err){
   console.log(err);
 }
 
-  const sendPhoto = (e:any) =>{
+  const sendPhoto = (e:React.FormEvent<HTMLFormElement>) =>{
     e.preventDefault()
-      const imagesRef = ref(storage, 'profil/'+id+'/'+id+'.jpg');
+      if(photo){
+        const imagesRef = ref(storage, 'profil/'+id+'/'+id+'.jpg');
       uploadBytes(imagesRef, photo)
       .then(() => {
       console.log('Uploaded a blob or file!');
@@ -30,6 +31,8 @@ catch(err){
       })
       .catch((e)=>console.log('pb upload'+e)
       );
+      }
+      
     }
     
       const getPhoto = () => {
@@ -41,8 +44,10 @@ catch(err){
         .catch((err) =>console.log(err)
         )
       }
-      const handleChange =(e:any) =>{
-        setPhoto(e.target.files[0])
+      const handleChange =(e:React.ChangeEvent<HTMLInputElement>) =>{
+        if (e.target.files && e.target.files[0]) {
+          setPhoto(e.target.files[0]);
+        }
       }
     return (
         <div className='profil'>
