@@ -42,6 +42,7 @@
         justify-content: space-around;
         
         .btn{
+            height: 35px;
             width: 25%;
             cursor: pointer;
             background-color: rgb(215, 225, 181);
@@ -50,6 +51,17 @@
             
             .partage{
                 border-bottom-right-radius: 25px;
+            }
+        }
+        .comment{
+            display: flex;
+            flex-direction: column;
+            font-size: 0.9em;
+            p{
+                margin-bottom: -4px;
+            }
+            div{
+                margin-bottom: 2px;
             }
         }
         .btn:hover{

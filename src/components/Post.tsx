@@ -118,7 +118,7 @@ const Post = (props:DocumentData) => {
                         className='like btn centre'>
                             {fullPost.likes+' '} {fullPost.idLikes.includes(id)?<BiSolidLike aria-label='like'/>:<BiLike aria-label='unlike'/>}</div>
                     <div className='comment btn centre'
-                        onClick={viewComments}>{fullPost.nbComments} comments</div>
+                        onClick={viewComments}><p>{fullPost.nbComments}</p><div> comments</div></div>
                     <div className='partage btn centre'>partage</div>
                     {(id===fullPost.author.id)?(<button className='btn-modif' 
                         aria-label='modify or delete post'
