@@ -9,6 +9,11 @@ function App() {
   const navigate = useNavigate();
   const [Uid,setUid] = useState<string>('');
   const {checkUser}:UserType = getUser()
+
+  const sendUserToStore = async (uid:string) => {
+    await checkUser(uid)
+    navigate('/home')
+  }
   
   useEffect(()=>{
     if(localStorage.getItem('userId')){
@@ -16,15 +21,14 @@ function App() {
       if(checkId!==null){
         const idValue:string = checkId
         setUid(idValue)
+        sendUserToStore(Uid)
+        
       }
-      
-      checkUser(Uid)
-      navigate('/home')
     }
     else{
       navigate('/')
     }
-  },[Uid, checkUser,navigate])
+  },[Uid,navigate])
  
   return (
       <div>

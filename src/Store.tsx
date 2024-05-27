@@ -12,7 +12,7 @@ export const getUser = create<UserType>((set)=>({
     email:'email@mail.fr',
     id:'',
     pseudo:'',
-    async checkUser(userId:string){
+    checkUser(userId:string){
         if(!userId){
           console.log('vérifiez que vous êtes connecté');
         }

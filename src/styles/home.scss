@@ -1,12 +1,13 @@
 .home{
-    background-color: $color4 ;
-    height: 100%;
+    background-color: $color3 ;
+    width: 100%;
     .contentx3{
         width: 100%;
-        display: flex;
+        
     }
     .posts-middle{
-        width: 33%;
+        width: 98%;
+        margin-left: 1%;
     }
     .newMessage{
         display: flex;
