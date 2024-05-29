@@ -76,19 +76,19 @@ const Signup = () => {
                     
                     <form >  
                         <label htmlFor="pseudo">Pseudo:</label>
-                        <input onChange={(e)=>setPseudo(e.target.value)} type="text" name="pseudo" id="pseudo" /> 
+                        <input onChange={(e)=>setPseudo(e.target.value)} type="text" autoComplete='off' name="pseudo" id="pseudo" /> 
                         <div className="pseudoError red"></div>
 
                         <label htmlFor="emailUp">Email:</label>
-                        <input onChange={(e)=>setEmail(e.target.value)} type="text" name="email" id="emailUp" />
+                        <input onChange={(e)=>setEmail(e.target.value)} type="text" autoComplete='off' name="email" id="emailUp" />
                         <div className="emailError red"></div>
 
                         <label htmlFor="mdpUp">Mot de passe:</label>
-                        <input onChange={(e)=>setPassword(e.target.value)} type="text" name="mdp" id="mdpUp" />
+                        <input onChange={(e)=>setPassword(e.target.value)} type="text" autoComplete='off' name="mdp" id="mdpUp" />
                         <div className="passwordError red"></div>
 
                         <label htmlFor="confirm">confirmer:</label>
-                        <input onChange={(e)=>setVerif(e.target.value)} type="text" name="confirm" id="confirm" />
+                        <input onChange={(e)=>setVerif(e.target.value)} type="text" autoComplete='off' name="confirm" id="confirm" />
                         <div className="verifError red"></div>
                         
                         <input onClick={SubmitSignup} className='envoyer' type="button" value="Valider" />
