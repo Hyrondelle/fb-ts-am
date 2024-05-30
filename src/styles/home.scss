@@ -3,9 +3,13 @@
     width: 100%;
     .contentx3{
         width: 100%;
-        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
     .posts-middle{
+        order: 1;
         width: 98%;
         margin-left: 1%;
     }
@@ -57,5 +61,13 @@
         border: solid 1px;
         font-size: 0.9em;
 
+    }
+    @media screen and (min-width: 1024px){
+        .contentx3{
+            flex-direction: row;
+        }
+        .posts-middle{
+            order: 2;
+        }
     }
 }

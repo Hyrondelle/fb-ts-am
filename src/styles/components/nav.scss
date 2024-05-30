@@ -19,6 +19,9 @@ nav{
     a:hover{
         background-color: rgb(132, 158, 158);
     }
+    h1{
+        margin-top: 1%;
+    }
     .pseudo-exit{
         display: flex;
         width: 60%;
@@ -27,14 +30,14 @@ nav{
 
         #profilNav{
             width: 40px;
-            height: 0p4x;
+            height: 40px;
             border-radius: 50px;
             object-fit: cover;
             margin-right: 10px;
         }
         button{
             width: 30px;
-            border-radius: 10px;
+            border-radius: 15px;
             border-color: rgb(121, 121, 129);
             display: flex;
             align-items: center;
@@ -50,7 +53,38 @@ nav{
         }
     }
     h1{
-        
         margin-right: 8%;
+    }
+    @media screen and (min-width: 1200px){
+        a{
+            width: 9%;
+        }
+        .pseudo-exit{
+            #profilNav{
+                width: 60px;
+                height: 60px;
+            }
+            button{
+                width: 7%;
+                font-size: 1.1em;
+            }
+        }
+    }
+    @media screen and (min-width: 1500px){
+        a{
+            width: 9%;
+        }
+        .pseudo-exit{
+            #profilNav{
+                margin-top: 0.8%;
+                width: 70px;
+                height: 70px;
+                object-fit:fill;
+            }
+            button{
+                width: 6%;
+                font-size: 1.1em;
+            }
+        }
     }
 }

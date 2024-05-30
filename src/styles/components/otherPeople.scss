@@ -5,6 +5,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    order: 3;
     h2{
         margin:10px auto 0 20%;
     }
@@ -37,5 +38,8 @@
         height: 60px;
         border-radius: 50px;
         object-fit: cover;
+    }
+    @media screen and (min-width: 768px){
+        width: 50%;
     }
 }
