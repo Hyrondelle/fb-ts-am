@@ -41,4 +41,14 @@
     @media screen and (min-width: 1024px){
         order: 1;
     }
+    @media screen and (min-width: 1500px){
+        li{
+            width: 90%;
+            margin: 20px ;
+        }
+        img{
+            width: 90px;
+            height: 90px;
+        }
+    }
 }
