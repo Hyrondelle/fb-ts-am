@@ -71,17 +71,14 @@ const Home = () => {
         }
         
     }
-        
-
+    
     useEffect(()=>{
-        
-            getDocs(postCollectionRef)
-            .then((data)=>{
-                setListPost(data.docs);
-            })
-            
-        
-    },[listPost, postCollectionRef])
+        getDocs(postCollectionRef)
+        .then((data)=>{
+            setListPost(data.docs);
+        })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[setListPost])
 
     const handleChange =(event:React.ChangeEvent<HTMLInputElement>) =>{
         if (event.target.files && event.target.files[0]) {

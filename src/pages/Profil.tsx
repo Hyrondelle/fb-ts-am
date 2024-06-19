@@ -54,7 +54,7 @@ catch(err){
           <Nav/>
           <form onSubmit={sendPhoto}>
             <input aria-label='choose profil picture' className='file' onChange={handleChange} type="file" name="photoProfil" id="photoProfil" />
-            <button  type="submit">envoyer</button>
+            <button type="submit">envoyer</button>
             <img id='imgProfil' src='src\assets\defautProfil.png' alt='profil picture'></img>
             <button onClick={getPhoto}>changer la photo</button>
             </form>

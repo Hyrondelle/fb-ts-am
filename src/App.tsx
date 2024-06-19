@@ -10,24 +10,28 @@ function App() {
   const [Uid,setUid] = useState<string>('');
   const {checkUser}:UserType = getUser()
 
-  const sendUserToStore = async (uid:string) => {
-    await checkUser(uid)
-    navigate('/home')
+  const sendUserToStore = async () => {
+    const checkId = localStorage.getItem('userId');
+    if(checkId!==null){
+      const idValue:string = checkId
+      setUid(idValue)
+      await checkUser(Uid)
+      navigate('/home')
   }
+  else{
+    navigate('/')
+  }
+}
   
   useEffect(()=>{
-    if(localStorage.getItem('userId')){
-      const checkId = localStorage.getItem('userId');
-      if(checkId!==null){
-        const idValue:string = checkId
-        setUid(idValue)
-        sendUserToStore(Uid)
+    
+      
+        sendUserToStore()
         
-      }
-    }
-    else{
-      navigate('/')
-    }
+      
+    
+    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[Uid,navigate])
  
   return (
