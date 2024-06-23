@@ -65,6 +65,7 @@
     @media screen and (min-width: 1024px){
         .contentx3{
             flex-direction: row;
+            align-items: normal;
         }
         .posts-middle{
             order: 2;

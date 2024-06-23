@@ -4,7 +4,7 @@ import {BiLike, BiSolidLike } from "react-icons/bi";
 import { UserType, getUser } from '../Store';
 import { useState } from 'react';
 import { getStorage, ref,getDownloadURL } from "firebase/storage";
-import { doc ,updateDoc,collection,arrayUnion,arrayRemove,deleteDoc, DocumentData} from 'firebase/firestore';
+import { doc ,updateDoc,collection,arrayUnion,arrayRemove,deleteDoc, DocumentData,Timestamp} from 'firebase/firestore';
 import { db } from '../firebase.config';
 
 const Post = (props:DocumentData) => {
@@ -82,7 +82,7 @@ const Post = (props:DocumentData) => {
             console.log('veuillez écrire un commentaire');
         }
         else{
-            await updateDoc(doc(postRef,fullPost.id),{comments:arrayUnion({addComment,id,pseudo}),nbComments:fullPost.nbComments+1})
+            await updateDoc(doc(postRef,fullPost.id),{comments:arrayUnion({addComment,id,pseudo,date:Timestamp.now()}),nbComments:fullPost.nbComments+1})
             .then(()=>{  
                 console.log("commentaire envoyé");
                 setAddComment('')   
@@ -141,7 +141,7 @@ const Post = (props:DocumentData) => {
                 {
                     fullPost.comments
                     .map((comment:DocumentData)=>
-                    <li key={comment.id}><div>{'@'+comment.pseudo}</div><div>{comment.addComment}</div></li>)
+                    <li key={comment.date}><div>{'@'+comment.pseudo}</div><div>{comment.addComment}</div></li>)
                 }
                 </ul>:<></>}
             </div>         
