@@ -10,7 +10,7 @@ import OtherPeople from '../components/OtherPeople';
 
 const Home = () => {
     const [post,setPost] = useState<string>('');
-    const [listPost,setListPost] = useState<Array<DocumentData>>([]);
+    const [listPost,setListPost] = useState<Array<DocumentData>|null>(null);
     const [photo,setPhoto] = useState<string|null>();
     const [photoSend,setPhotoSend] = useState<Blob>();
     const postCollectionRef = collection(db,"posts");
@@ -71,12 +71,14 @@ const Home = () => {
         }
         
     }
-    
+    const getPosts = async() =>{
+        const data = await getDocs(postCollectionRef)
+        setListPost(data.docs)
+        
+    }
     useEffect(()=>{
-        getDocs(postCollectionRef)
-        .then((data)=>{
-            setListPost(data.docs);
-        })
+        getPosts()
+        
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[setListPost])
 
@@ -117,7 +119,7 @@ const Home = () => {
                     </form>
                     <ul className='posts'>
                     {
-                        listPost.map((post:DocumentData)=><Post post={post.data()} key={post.id}/>)
+                        listPost?.map((post:DocumentData)=><Post post={post.data()} key={post.id}/>)
                     }
                     </ul>
                 </div>
