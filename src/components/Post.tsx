@@ -2,7 +2,7 @@
 import {FaPen} from 'react-icons/fa';
 import {BiLike, BiSolidLike } from "react-icons/bi";
 import { UserType, getUser } from '../Store';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getStorage, ref,getDownloadURL } from "firebase/storage";
 import { doc ,updateDoc,collection,arrayUnion,arrayRemove,deleteDoc, DocumentData,Timestamp} from 'firebase/firestore';
 import { db } from '../firebase.config';
@@ -10,21 +10,25 @@ import { db } from '../firebase.config';
 const Post = (props:DocumentData) => {
     const {id,pseudo}:UserType = getUser()
     const storage = getStorage();
-    const messagePost = props.post.message
-    const fullPost = props.post
+    //const messagePost = props.post.message
+    //const fullPost = props.post
+    const [fullPost,setFullPost] =useState<DocumentData>(props.post)
     const [click,setClick] = useState<boolean>(false);
-    const [changeMessage,setChangeMessage] = useState<string>(messagePost);
+    const [changeMessage,setChangeMessage] = useState<string>(fullPost.message);
     const [addComment,setAddComment] = useState<string>('');
     const postRef = collection(db,'posts');
     const [viewComment,setViewComment] = useState<boolean>(false);
     const [photo,setPhoto] = useState<string>('');
     
-    if(fullPost.photo){
-        getDownloadURL(ref(storage, 'photos/'+fullPost.id+'/'+fullPost.id+'.jpg'))
-        .then((url) => {
-            setPhoto(url)
-        })
-    }
+    useEffect(()=>{
+        if(fullPost.photo){
+            getDownloadURL(ref(storage, 'photos/'+fullPost.id+'/'+fullPost.id+'.jpg'))
+            .then((url) => {
+                setPhoto(url)
+            })
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[fullPost])
 
     const modify = () =>{
         setClick(!click)
@@ -37,6 +41,7 @@ const Post = (props:DocumentData) => {
         if(fullPost.idLikes.includes(id)){
             await updateDoc(doc(postRef,fullPost.id),{idLikes:arrayRemove(id),likes:fullPost.likes-1})
             .then(()=>{  
+                setFullPost({...fullPost})
                 console.log("like enlevé");   
             })
             .catch((err:string)=>{
@@ -57,7 +62,7 @@ const Post = (props:DocumentData) => {
         
     const sendNewMessage = async(e:React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault();
-        await updateDoc(doc(postRef,id+messagePost[0]+messagePost[1]),{message:changeMessage})
+        await updateDoc(doc(postRef,id+fullPost.message[0]+fullPost.message[1]),{message:changeMessage})
             .then(()=>{  
                 console.log("post modifié");   
                 setClick(!click)
@@ -68,7 +73,7 @@ const Post = (props:DocumentData) => {
     }
     const deletePost = async(e:React.MouseEvent<HTMLButtonElement>) =>{
         e.preventDefault();
-        await deleteDoc(doc(postRef,id+messagePost[0]+messagePost[1]))
+        await deleteDoc(doc(postRef,id+fullPost.message[0]+fullPost.message[1]))
             .then(()=>{  
                 console.log("post effacé");   
             })
@@ -99,9 +104,9 @@ const Post = (props:DocumentData) => {
             <div aria-label='author' className='author'>{'@'+fullPost.author.pseudo}</div> 
             {fullPost.photo?<img src={photo} className='photopost'></img>:<></>}
             <div className='post-contain'>
-                {(!click||id+messagePost[0]+messagePost[1]!==fullPost.id)?(<div>{messagePost}</div>):
+                {(!click||id+fullPost.message[0]+fullPost.message[1]!==fullPost.id)?(<div>{fullPost.message}</div>):
                 (<form onSubmit={sendNewMessage}>
-                    <textarea defaultValue={messagePost} 
+                    <textarea defaultValue={fullPost.message} 
                         className='changeMsg'
                         onChange={(e)=>setChangeMessage(e.target.value)}>
                     </textarea>
